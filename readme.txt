@@ -46,7 +46,22 @@ Write only necessary attributes. Default settings are below.
 * **design** is the type of output design. "1" or "2" at present.
 * **item** is the number of images in a line of a table. This attribute is enabled only when "design=2".
 
-You can also change design of table with CSS.  output HTML tags, *table, td, div, img, p,* have a *class="image_archives"*.
+You can also change design of table with CSS.  output HTML tags, *table, td, div, a, img, p,* have a *class="image_archives"*.
+
+= CSS example =
+
+table.image_archives { <br />
+&nbsp;&nbsp;border: 0 none;<br />
+}
+
+div.image_archives { <br />
+&nbsp;&nbsp;text-align: center; <br />
+&nbsp;&nbsp;line-height: 1; <br />
+}
+
+p.image_archives { <br />
+&nbsp;&nbsp;text-decoration: none; <br />
+}
 
 == Installation ==
 
