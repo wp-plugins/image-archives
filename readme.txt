@@ -1,6 +1,6 @@
 === Image Archives ===
 Contributors: coppola00
-Donate link: http://if-music.be/
+Donate link: http://if-music.be/2009/10/15/image-archives/
 Tags: image, archive, post list, thumbnail
 Requires at least: 2.0
 Tested up to: 2.8.4
@@ -16,19 +16,20 @@ Show images that you searched in your database, and the images are linked to the
 
 [Sample](http://if-music.be/2009/10/15/image-archives/)
 
-NOTICE:
-*The images that you want to show is needed to be attached to posts.
-*In order to link to the permalink of a post, its post is required to be "published".
+= NOTICE =
+* The images that you want to show is needed to be attached to posts.
+* In order to link to the permalink of a post, its post is required to be "published".
 
-HOW TO USE:
-Write shortcode "[image_arhives]" in the place you want to show the image archives.
+= HOW TO USE =
+Write shortcode "\[image\_archives\]" in the place you want to show the image archives.
 And you can set some attributes.
 
-"[image_archives term_id=? ordered_by=? order=? str=? size=? design=? item=?]"
+\[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *size=?* *design=?* *item=?*\]
+
 Write only necessary attributes. Default settings are below.
 
-default
-* term_id  = 0
+= default =
+* term\_id  = 0
 * order_by = title
 * order    = ASC
 * str      = %_logo
@@ -36,16 +37,16 @@ default
 * design   = 2
 * item     = 3
 
-explanation
-* "term_id" requires unique ID(s) of tags or categories. You can use several IDs like "term_id=1,3,10". Numbers only.
-* "order_by" is  how to order the image list.  You can use "title" or "date".
-* "order" requires a sort type. You can use "ASC" or "DESC". Uppercase only.
-* "str" is a search string. This plugin searches "post_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition strings.[SQL LIKE condition](http://www.techonthenet.com/sql/like.php)
-* "size" is the size of the images. "thumbnail" or "medium" or "large" or "full".
-* "design" is the type of output design. "1" or "2" at present.
-* "item" is the number of images in a line of a table. This attribute is enabled only when "design=2".
+= explanation =
+* **term_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
+* **order_by** is  how to order the image list.  You can use "title" or "date".
+* **order** requires a sort type. You can use "ASC" or "DESC". Uppercase only.
+* **str** is a search string. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition strings.[SQL LIKE condition](http://www.techonthenet.com/sql/like.php)
+* **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
+* **design** is the type of output design. "1" or "2" at present.
+* **item** is the number of images in a line of a table. This attribute is enabled only when "design=2".
 
-
+You can also change design of table with CSS.  output HTML tags, *table, td, div, img, p,* have a *class="image_archives"*.
 
 == Installation ==
 
@@ -58,4 +59,3 @@ explanation
 
 = 0.1 =
 * Release
-
