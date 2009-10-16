@@ -65,16 +65,6 @@ class image_archives {
 	
 	function image_archives_output ( $atts, $content = null ) {
 		
-		/************************************************************************************************
-		 * $term_id = 0;			3,7,11 のように複数指定可能。タグの数字IDでも可能
-		 * $order_by = title;		タイトルか日付によるソートを選びます。
-		 * $order = 'ASC';			ASC or DESC
-		 * $str = '%_logo';			検索文字列
-		 * $size = 'medium';		アップロードした画像のサイズを決める。(thumbnail, medium, large, full)
-		 * $design = '2'			今のところ、1-2
-		 * $item = '3'				design=2の時、一行に何個の画像を表示するか。
-		 ************************************************************************************************/
-		
 		extract( shortcode_atts( array(
 			'term_id'	=>	'0',
 			'order_by'	=>	'title',
