@@ -1,5 +1,5 @@
 === Image Archives ===
-Contributors: coppola
+Contributors: coppola00
 Donate link: http://if-music.be/
 Tags: image, archive, post list, thumbnail
 Requires at least: 2.0
