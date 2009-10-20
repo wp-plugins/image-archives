@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/10/15/image-archives/
  Description: Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
- Version: 0.1
+ Version: 0.11
  Author: coppola
  Author URI: http://if-music.be/
  */
