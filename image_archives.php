@@ -118,7 +118,6 @@ class image_archives {
 		
 		
 		// OUTPUT
-		
 		$output = "<table class=\"image_archives\"><tbody>\n";
 		
 		if( $design == 1 ) { 
@@ -127,7 +126,7 @@ class image_archives {
 				$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
 			
 				$output .= "  <tr>\n"
-						  ."    <td class=\"image_archives\"><div class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"image_archives\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\"></a></td><td class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."><p class=\"image_archives\">". $arr[$i][post_title] ."</p></a></div></td>\n"
+						  ."    <td class=\"image_archives\"><div class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"image_archives\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\"></a></td><td class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."><p class=\"image_archives\">". $arr[$i][post_title] ."</p></a></div></td>\n"
 						  ."  </tr>\n";
 			}
 		
@@ -139,7 +138,7 @@ class image_archives {
 					$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
 					
 					$output .= "  <tr>\n";
-					$output .= "    <td class=\"image_archives\"><div class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"image_archives\" src='$img_src[0]' alt=\"". $arr[$i][post_title] ."\"></a><br /><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><div class=\"image_archives\"><p class=\"image_archives\">". $arr[$i][post_title] ."</p></div></a></td>\n";
+					$output .= "    <td class=\"image_archives\"><div class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"image_archives\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\"></a><br /><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><div class=\"image_archives\"><p class=\"image_archives\">". $arr[$i][post_title] ."</p></div></a></td>\n";
 					$output .= "  </tr>\n";
 				}
 			
@@ -150,7 +149,7 @@ class image_archives {
 				for ($i=0; $arr[$i] !== NULL; $i++) {
 					$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
 				
-					$output .= "    <td class=\"image_archives\"><div class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"image_archives\" src='$img_src[0]' alt=\"". $arr[$i][post_title] ."\"></a><br /><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><div class=\"image_archives\"><p class=\"image_archives\">". $arr[$i][post_title] ."</p></div></a></td>\n";
+					$output .= "    <td class=\"image_archives\"><div class=\"image_archives\"><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"image_archives\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\"></a><br /><a class=\"image_archives\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><div class=\"image_archives\"><p class=\"image_archives\">". $arr[$i][post_title] ."</p></div></a></td>\n";
 				
 					if ( $i % $item == $item - 1 ) $output .= "  </tr>";
 				}
