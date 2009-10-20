@@ -75,5 +75,5 @@ p.image_archives { <br />
 = 0.11=
 * Add a attribute "title" to output img tags.
 
-= 0.1 =
+= 0.10 =
 * Release
