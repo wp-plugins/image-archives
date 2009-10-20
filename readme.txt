@@ -1,6 +1,6 @@
 === Image Archives ===
 Contributors: coppola00
-Donate link: http://if-music.be/2009/10/15/image-archives/
+Donate link: 
 Tags: image, archive, post list, thumbnail
 Requires at least: 2.0
 Tested up to: 2.8.4
