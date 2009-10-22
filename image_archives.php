@@ -139,13 +139,13 @@ class image_archives {
 		} elseif( $order_by == 'date' ) {
 			$this->v_order_by	= 'post_date';
 		} else {
-			return "shortcode atts error. order_by is required to be 'title' or 'date'.";
+			exit ("shortcode atts error. order_by is required to be 'title' or 'date'.");
 		}
 		//order
 		if ( ($order == 'ASC') || ($order == 'DESC') ) {
 			$this->v_order = $order;
 		} else {
-			return "shortcode atts error. order is required to be 'ASC' or 'DESC'.";
+			exit ("shortcode atts error. order is required to be 'ASC' or 'DESC'.");
 		}
 		//string
 		$this->v_str = $str;
@@ -155,16 +155,16 @@ class image_archives {
 		if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) {
 			$this->v_img_size = $size;
 		} else {
-			return "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
+			exit ("shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.");
 		}
 		//design
 		$this->v_design = intval( $design );
 		//item
 		$this->v_item = intval( $item );
 		if ( $item < 1 ) {
-			return "the number of ITEM is required to be larger than 0.";
+			exit ("the number of ITEM is required to be larger than 0.");
 		} elseif( $item > 100 ) {
-			return "the number of ITEM is too big.";
+			exit ("the number of ITEM is too big.");
 		}
 		//date format
 		$this->v_date_format = $date_format;
@@ -172,7 +172,7 @@ class image_archives {
 		if ( ($date_show == 'on') || ( $date_show == 'off') ) {
 			$this->v_date_show = $date_show;
 		} else {
-			return "date_show is required to be 'on' or 'off'.";
+			exit ("date_show is required to be 'on' or 'off'.");
 		}
 		
 		echo $this->image_archives_output();
@@ -303,10 +303,8 @@ class image_archives {
 			$output .= "</div>\n";
 			
 		} else {
-			return "\"design\" is required to be from 1 to 3." ;
+			echo "\"design\" is required to be from 1 to 3." ;
 		}
-		
-
 		
 		return $output;
 	}
