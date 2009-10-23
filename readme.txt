@@ -81,7 +81,7 @@ p.img\_arc { <br />
 1. Write shortcode "[image_archives]" in your post. And some attributes are needed.
 
 
-== Screenshot ==
+== Screenshots ==
 1. Output designs.
 
 
