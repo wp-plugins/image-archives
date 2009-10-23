@@ -90,9 +90,9 @@ class image_archives {
 		//item
 		$this->v_item = intval( $item );
 		if ( $item < 1 ) {
-			return "the number of ITEM is required to be larger than 0.";
+			return "the number of 'item' is required to be larger than 0.";
 		} elseif( $item > 100 ) {
-			return "the number of ITEM is too big.";
+			return "the number of 'item' is too big.";
 		}
 		//date format
 		$this->v_date_format = $date_format;
@@ -162,9 +162,9 @@ class image_archives {
 		//item
 		$this->v_item = intval( $item );
 		if ( $item < 1 ) {
-			exit ("the number of ITEM is required to be larger than 0.");
+			exit ("the number of 'item' is required to be larger than 0.");
 		} elseif( $item > 100 ) {
-			exit ("the number of ITEM is too big.");
+			exit ("the number of 'item' is too big.");
 		}
 		//date format
 		$this->v_date_format = $date_format;
