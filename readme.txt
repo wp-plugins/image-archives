@@ -28,22 +28,22 @@ And you can set some attributes.
 
 Write only necessary attributes. Default settings are below.
 
-You can also use the function of this plugin. In order to use the function, write *wp\_image\_archives* within php code. And in order to use the attributes, write like below.
+You can also use the function of this plugin. In order to use the function, write *wp\_image\_archives\(\);* within php code. And in order to use the attributes, write like below.
 
 wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 
 
-= Default =
-* term\_id    = 1
-* order\_by    = title
-* order       = ASC
-* str         = %_logo
-* limit       = 0,50
-* size        = medium
-* design      = 2
-* item        = 3
+= Default values =
+* term\_id = 1
+* order\_by = title
+* order = ASC
+* str = %_logo
+* limit = 0,50
+* size = medium
+* design = 2
+* item = 3
 * date\_format = Y-m-d
-* date\_show   = off
+* date\_show = off
 
 = explanation =
 * **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
