@@ -42,7 +42,7 @@ class image_archives {
 	// shortcode function
 	// shortcode は return を用いても良いが、template tag では使えない。
 	function image_archives_shortcode ( $atts, $content = null ) {
-	
+		
 		extract( shortcode_atts( array(
 			'term_id'		=>	'1',
 			'order_by'		=>	'title',
@@ -104,8 +104,9 @@ class image_archives {
 		}
 		
 		return $this->image_archives_output();
-	
+		
 	}
+	
 	
 	//template tag function
 	// cannot use "return".
@@ -179,7 +180,6 @@ class image_archives {
 	}
 	
 	
-	
 	function image_archives_query() {
 		
 		global $wpdb;
@@ -201,7 +201,7 @@ class image_archives {
 		
 		$query_array = $wpdb->get_results($query, ARRAY_A);
 		// この結果、query_array[ img_post_id / parent_id / post_title / post_date ]
-
+		
 		
 		if(is_array($query_array)) {
 			return $query_array;
@@ -226,7 +226,7 @@ class image_archives {
 			
 			for ($i=0; $arr[$i] !== NULL; $i++) {
 				$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
-			
+				
 				$output .= "  <tr>\n"
 				 		.  "    <td class=\"img_arc\">\n"
 						.  "      <div class=\"img_arc_img\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a></div>\n"
@@ -244,7 +244,7 @@ class image_archives {
 		} elseif ( $this->v_design == 2) {
 			
 			if ( $this->v_item == 1 ) {
-			
+				
 				$output = "<table class=\"img_arc\"><tbody>\n";
 				
 				for ($i=0; $arr[$i] !== NULL; $i++) {
@@ -276,10 +276,10 @@ class image_archives {
 					if ( $this->v_date_show == 'on' ) $output .= "<p class=\"img_src_date\">( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 					$output	.= "      </div>\n"
 							.  "    </td>\n";
-				
+					
 					if ( $i % $this->item == $this->item - 1 ) $output .= "  </tr>\n";
 				}
-			
+				
 				// $i はループ終了後 +1 されている
 				$i = $i -1;
 				if ( $i % $this->item != $this->item - 1 ) $output .= "  </tr>\n";
