@@ -232,7 +232,7 @@ class image_archives {
 						.  "      <div class=\"img_arc_img\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a></div>\n"
 						.  "    </td>\n"
 						.  "    <td class=\"img_arc\">\n"
-						.  "      <div class=\"img_arc_text\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><p class=\"img_arc\">". $arr[$i][post_title] ."</p></a>";
+						.  "      <div class=\"img_arc_text\"><p class=\"img_arc\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\">". $arr[$i][post_title] ."</a></p>";
 				if ( $this->v_date_show == 'on' ) $output .= "<p class=\"img_src_date\">( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 				$output .= "      </div>\n"
 						.  "    </td>\n"
@@ -253,7 +253,7 @@ class image_archives {
 					$output .= "  <tr>\n"
 							.  "    <td class=\"img_arc\">\n"
 							.  "      <div class=\"img_arc_img\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a></div>\n"
-							.  "      <div class=\"img_arc_text\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><p class=\"img_arc\">". $arr[$i][post_title] ."</p></a>";
+							.  "      <div class=\"img_arc_text\"><p class=\"img_arc\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\">". $arr[$i][post_title] ."</a></p>";
 					if ( $this->v_date_show == 'on' ) $output .= "<p class=\"img_src_date\">( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 					$output .= "      </div>\n"
 							.  "    </td>\n"
@@ -270,12 +270,12 @@ class image_archives {
 					$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
 					
 					if ( $i % $this->v_item == 0 ) $output .= "  <tr>\n";
-					$output .= "    <td class=\"img_arc\">\n"
-							.  "      <div class=\"img_arc_img\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a></div>\n"
-							.  "      <div class=\"img_arc_text\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><p class=\"img_arc\">". $arr[$i][post_title] ."</p></a>";
+					$output .= "	<td class=\"img_arc\">\n"
+							.  "		<div class=\"img_arc_img\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a></div>\n"
+							.  "		<div class=\"img_arc_text\"><p class=\"img_arc\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\">". $arr[$i][post_title] ."</a></p>";
 					if ( $this->v_date_show == 'on' ) $output .= "<p class=\"img_src_date\">( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
-					$output	.= "      </div>\n"
-							.  "    </td>\n";
+					$output	.= "		</div>\n"
+							.  "	</td>\n";
 					
 					if ( $i % $this->item == $this->item - 1 ) $output .= "  </tr>\n";
 				}
@@ -294,8 +294,8 @@ class image_archives {
 			for ($i=0; $arr[$i] !== NULL; $i++) {
 				$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
 				
-				$output .= "  <p class=\"img_arc\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a>\n"
-						.  "  <a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\">". $arr[$i][post_title] ."</a>";
+				$output .= "	<p class=\"img_arc\"><a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\"><img class=\"img_arc\" src=\"$img_src[0]\" alt=\"". $arr[$i][post_title] ."\" title=\"". $arr[$i][post_title] ."\" /></a>\n"
+						.  "	 <a class=\"img_arc\" href=\"". get_permalink($arr[$i][parent_id]) ."\">". $arr[$i][post_title] ."</a>";
 				if ( $this->v_date_show == 'on' ) $output .= "  ( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )" ;
 				$output .= "</p>\n";
 			}
