@@ -3,7 +3,7 @@ Contributors: coppola00
 Donate link: 
 Tags: image, archive, post list, thumbnail
 Requires at least: 2.0
-Tested up to: 2.8.4
+Tested up to: 2.8.5
 Stable tag: trunk
 
 Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
@@ -87,6 +87,9 @@ p.img\_arc { <br />
 
 == Changelog ==
 
+= 0.21 =
+* Fixed some code.
+ 
 = 0.20 =
 * Add a template tag of this plugin. *wp\_image\_archives*.
 * Add attributes "limit", "date\_format", "date\_show".
