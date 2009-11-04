@@ -70,7 +70,7 @@ div.img\_arc\_img, div.img\_arc\_text { <br />
 &nbsp;&nbsp;line-height: 1; <br />
 }
 
-p.img\_arc { <br />
+a.img\_arc { <br />
 &nbsp;&nbsp;text-decoration: none; <br />
 }
 
