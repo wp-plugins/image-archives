@@ -86,7 +86,7 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 
 == Screenshots ==
-1. Output designs. But this is old.
+1. Output designs of 1-3.
 
 
 == Changelog ==
