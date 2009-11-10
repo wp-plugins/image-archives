@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/10/15/image-archives/
  Description: Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
- Version: 0.30
+ Version: 0.31
  Author: coppola
  Author URI: http://if-music.be/
  */
@@ -209,9 +209,11 @@ class image_archives {
 		$query_array = $wpdb->get_results($query, ARRAY_A);
 		// この結果、query_array[ img_post_id / parent_id / post_title / post_date ]
 		
-		// get the number of row
-		$query_count = "SELECT FOUND_ROWS();";
-		$row_count = $wpdb->get_var($query_count);
+		$row_count = $wpdb->num_rows;
+		
+		// get the number of row in without limit
+		//$query_count = "SELECT FOUND_ROWS();";
+		//$row_count = $wpdb->get_var($query_count);
 		
 		if(is_array($query_array)) {
 			return $query_array;
@@ -227,6 +229,7 @@ class image_archives {
 		
 		if( !$arr ) return "Query Error. Your 'str'(search strings) may be wrong or your input 'term_id' don't exsit, or 'limit' may be wrong.";
 		
+		//echo "all count: $count";
 		
 		// OUTPUT
 		

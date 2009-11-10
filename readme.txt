@@ -51,7 +51,7 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * **order\_by** is a method of ordering a list of the images.  You can use "title" or "date".
 * **order** requires a sort type. You can use "ASC" or "DESC". Uppercase only.
 * **str** is a search string. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
-* **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'. When you use 'limit' in design=4,5, and 'limit' is smaller than the number of rows with no limit, this doesn't output the number of items correctly.
+* **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
 * **design** is the type of output design. "1" to "5" at present. design=4,5 use jQuery. design=4 uses [Accordion](http://jqueryui.com/demos/accordion/). design=5 uses [Tabs](http://jqueryui.com/demos/tabs/).
 * **item** is the number of images per a page(section). This attribute is enabled only when "design=4,5".
@@ -86,10 +86,13 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 
 == Screenshots ==
-1. Output designs.
+1. Output designs. But this is old.
 
 
 == Changelog ==
+
+= 0.31 =
+* Fixed code.
 
 = 0.30 =
 * Added design=4,5. This design use jQuery. JavaScript needed.
