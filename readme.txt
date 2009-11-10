@@ -1,7 +1,7 @@
 === Image Archives ===
 Contributors: coppola00
 Donate link: 
-Tags: image, archive, post list, thumbnail
+Tags: image, archive, post list, thumbnail, jQuery
 Requires at least: 2.0
 Tested up to: 2.8.5
 Stable tag: trunk
@@ -24,7 +24,7 @@ Show images that you searched in your database, and the images are linked to the
 Write shortcode "\[image\_archives\]" in the place you want to show the image archives.
 And you can set some attributes.
 
-\[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *date_format=?* *date_show=?*\]
+\[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *column=?* *date_format=?* *date_show=?*\]
 
 Write only necessary attributes. Default settings are below.
 
@@ -41,7 +41,8 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * limit = 0,50
 * size = medium
 * design = 2
-* item = 3
+* item = 9
+* column = 3
 * date\_format = Y-m-d
 * date\_show = off
 
@@ -52,8 +53,9 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * **str** is a search string. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
 * **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
-* **design** is the type of output design. "1" or "2" at present.
-* **item** is the number of images in a line of a table. This attribute is enabled only when "design=2".
+* **design** is the type of output design. "1" to "5" at present. design=4,5 use jQuery. design=4 uses [Accordion](http://jqueryui.com/demos/accordion/). design=5 uses [Tabs](http://jqueryui.com/demos/tabs/).
+* **item** is the number of images per a page(section). This attribute is enabled only when "design=4,5".
+* **column** is the number of columns. This attribute is enabled only when "design=2,4,5".
 * **date\_format** is the date format. Please refer to [PHP.net date format](http://php.net/manual/en/function.date.php).
 * **date\_show** is a switch to show posts' date or not. You can use "on" or "off".
 
@@ -74,6 +76,8 @@ a.img\_arc { <br />
 &nbsp;&nbsp;text-decoration: none; <br />
 }
 
+As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/accordion/), [Tabs](http://jqueryui.com/demos/tabs/).
+
 == Installation ==
 
 1. Upload this plugin files to the "/wp-content/plugins/" directory.
@@ -86,6 +90,10 @@ a.img\_arc { <br />
 
 
 == Changelog ==
+
+= 0.30 =
+* Added design=4,5. This design use jQuery. JavaScript needed.
+* Now 'item' means the number of images per a page. You can determine the number of columns with 'column'.
 
 = 0.21 =
 * Fixed some code.
