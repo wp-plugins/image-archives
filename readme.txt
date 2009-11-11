@@ -14,7 +14,7 @@ First of all, sorry for my bad English.
 
 Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
 
-[Sample](http://if-music.be/2009/10/15/image-archives/)
+[Sample](http://if-music.be/2009/11/10/image-archives/)
 
 = NOTICE =
 * The images that you want to show is needed to be attached to posts.
