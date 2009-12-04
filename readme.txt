@@ -3,7 +3,7 @@ Contributors: coppola00
 Donate link: 
 Tags: image, archive, post list, thumbnail, jQuery
 Requires at least: 2.0
-Tested up to: 2.8.5
+Tested up to: 2.8.6
 Stable tag: trunk
 
 Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
@@ -91,8 +91,11 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 == Changelog ==
 
+= 0.32 =
+* Fixed some code.
+
 = 0.31 =
-* Fixed code.
+* Fixed some code.
 
 = 0.30 =
 * Added design=4,5. This design use jQuery. JavaScript needed.

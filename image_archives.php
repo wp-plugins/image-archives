@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/10/15/image-archives/
  Description: Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
- Version: 0.31
+ Version: 0.32
  Author: coppola
  Author URI: http://if-music.be/
  */
@@ -242,7 +242,7 @@ class image_archives {
 				
 				$output .= "  <tr>\n"
 				 		.  "    <td class='img_arc'>\n"
-						.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". $arr[$i][post_title] ."' title='". $arr[$i][post_title] ."' /></a></div>\n"
+						.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 						.  "    </td>\n"
 						.  "    <td class='img_arc'>\n"
 						.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
@@ -265,7 +265,7 @@ class image_archives {
 					
 					$output .= "  <tr>\n"
 							.  "    <td class='img_arc'>\n"
-							.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". $arr[$i][post_title] ."' title='". $arr[$i][post_title] ."' /></a></div>\n"
+							.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 							.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 					if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 					$output .= "      </div>\n"
@@ -284,7 +284,7 @@ class image_archives {
 					
 					if ( $i % $this->v_column == 0 ) $output .= "  <tr>\n";
 					$output .= "	<td class='img_arc'>\n"
-							.  "		<div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". $arr[$i][post_title] ."' title='". $arr[$i][post_title] ."' /></a></div>\n"
+							.  "		<div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 							.  "		<div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 					if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 					$output	.= "		</div>\n"
@@ -307,7 +307,7 @@ class image_archives {
 			for ($i=0; $arr[$i] !== NULL; $i++) {
 				$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
 				
-				$output .= "	<p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". $arr[$i][post_title] ."' title='". $arr[$i][post_title] ."' /></a>\n"
+				$output .= "	<p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a>\n"
 						.  "	 <a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a>";
 				if ( $this->v_date_show == 'on' ) $output .= "  ( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )" ;
 				$output .= "</p>\n";
@@ -358,7 +358,7 @@ class image_archives {
 						
 						if ( $cr % $this->v_column == 0 ) $output .= "	<tr>\n";
 						$output .= "	<td class='img_arc'>\n"
-								.  "		<div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". $arr[$i][post_title] ."' title='". $arr[$i][post_title] ."' /></a></div>\n"
+								.  "		<div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 								.  "		<div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 						if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 						$output	.= "		</div>\n"
@@ -435,7 +435,7 @@ class image_archives {
 						
 						if ( $cr % $this->v_column == 0 ) $output .= "	<tr>\n";
 						$output .= "	<td class='img_arc'>\n"
-								.  "		<div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". $arr[$i][post_title] ."' title='". $arr[$i][post_title] ."' /></a></div>\n"
+								.  "		<div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 								.  "		<div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 						if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 						$output	.= "		</div>\n"
