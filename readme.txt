@@ -50,7 +50,7 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
 * **order\_by** is a method of ordering a list of the images.  You can use "title" or "date".
 * **order** requires a sort type. You can use "ASC" or "DESC". Uppercase only.
-* **str** is a search string. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
+* **str** is a search string. The search string must be a part of the file name of images you uploaded. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
 * **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
 * **design** is the type of output design. "1" to "5" at present. design=4,5 use jQuery. design=4 uses [Accordion](http://jqueryui.com/demos/accordion/). design=5 uses [Tabs](http://jqueryui.com/demos/tabs/).
