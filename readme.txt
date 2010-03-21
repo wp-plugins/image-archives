@@ -93,7 +93,7 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 = 0.33 =
 * Default "str" attributes, now "str=%".
-* Updating Jquery to version 1.4.2.
+* Updated jQuery to version 1.4.2.
 
 = 0.32 =
 * Fixed some code.
