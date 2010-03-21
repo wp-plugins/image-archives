@@ -3,7 +3,7 @@ Contributors: coppola00
 Donate link: 
 Tags: image, archive, post list, thumbnail, jQuery
 Requires at least: 2.0
-Tested up to: 2.8.6
+Tested up to: 2.9.2
 Stable tag: trunk
 
 Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
@@ -26,7 +26,7 @@ And you can set some attributes.
 
 \[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *column=?* *date_format=?* *date_show=?*\]
 
-Write only necessary attributes. Default settings are below.
+Write only necessary attributes. Default settings are below. Probably you need to configure "str" and "term_id".
 
 You can also use the function of this plugin. In order to use the function, write *wp\_image\_archives\(\);* within php code. And in order to use the attributes, write like below.
 
@@ -37,7 +37,7 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * term\_id = 1
 * order\_by = title
 * order = ASC
-* str = %_logo
+* str = %
 * limit = 0,50
 * size = medium
 * design = 2
@@ -82,7 +82,7 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 1. Upload this plugin files to the "/wp-content/plugins/" directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
-1. Write shortcode "[image_archives]" in your post. And some attributes are needed.
+1. Write shortcode "[image_archives]" in your post. And  configure some attributes.
 
 
 == Screenshots ==
@@ -90,6 +90,10 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 
 == Changelog ==
+
+= 0.33 =
+* Default "str" attributes, now "str=%".
+* Updating Jquery to version 1.4.2.
 
 = 0.32 =
 * Fixed some code.

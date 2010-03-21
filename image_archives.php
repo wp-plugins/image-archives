@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/11/10/image-archives/
  Description: Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
- Version: 0.32
+ Version: 0.33
  Author: coppola
  Author URI: http://if-music.be/
  */
@@ -48,13 +48,13 @@ class image_archives {
 			'term_id'		=>	'1',
 			'order_by'		=>	'title',
 			'order'			=>	'ASC',
-			'str'			=>	'%_logo',
+			'str'			=>	'%',
 			'limit'			=>	'0,50',
 			'size'			=>	'medium',
-			'design'		=>	'2',
+			'design'			=>	'2',
 			'item'			=>	'9',
-			'column'		=>	'3',
-			'date_format'	=>	'Y-m-d',
+			'column'			=>	'3',
+			'date_format'		=>	'Y-m-d',
 			'date_show'		=>	'off',
 		), $atts ) );
 		
@@ -227,7 +227,7 @@ class image_archives {
 		//send query
 		$arr = $this->image_archives_query( $count );
 		
-		if( !$arr ) return "Query Error. Your 'str'(search strings) may be wrong or your input 'term_id' don't exsit, or 'limit' may be wrong.";
+		if( !$arr ) return "Query Error? Searching your database is done, but any images aren't found. Your 'str'(search strings) may be wrong or your input 'term_id' don't exist, or 'limit' may be wrong.";
 		
 		//echo "all count: $count";
 		
@@ -319,7 +319,7 @@ class image_archives {
 			
 			if( $this->v_column > 1)
 			{
-				$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.3.2.min.js'></script>\n"
+				$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.2.min.js'></script>\n"
 						. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.7.2.custom.min.js'></script>\n"
 						. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_accordion.js'></script>\n"
 						. "<div id='accordion'>";
@@ -391,7 +391,7 @@ class image_archives {
 			
 			if( $this->v_column > 1)
 			{
-				$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.3.2.min.js'></script>\n"
+				$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.2.min.js'></script>\n"
 						. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.7.2.custom.min.js'></script>\n"
 						. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_tabs.js'></script>\n"
 						. "<div id='tabs'>";
