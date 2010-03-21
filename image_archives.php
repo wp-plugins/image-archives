@@ -227,7 +227,7 @@ class image_archives {
 		//send query
 		$arr = $this->image_archives_query( $count );
 		
-		if( !$arr ) return "Query Error? Searching your database is done, but any images aren't found. Your 'str'(search strings) may be wrong or your input 'term_id' don't exist, or 'limit' may be wrong.";
+		if( !$arr ) return "Query Error? Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' don't exist, or 'limit' may be wrong.";
 		
 		//echo "all count: $count";
 		
