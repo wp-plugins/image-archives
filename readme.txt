@@ -1,7 +1,7 @@
 === Image Archives ===
 Contributors: coppola00
 Donate link: 
-Tags: image, archive, post list, thumbnail, jQuery
+Tags: image, archive, post list, list, thumbnail, jQuery
 Requires at least: 2.0
 Tested up to: 2.9.2
 Stable tag: trunk
@@ -59,7 +59,7 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * **date\_format** is the date format. Please refer to [PHP.net date format](http://php.net/manual/en/function.date.php).
 * **date\_show** is a switch to show posts' date or not. You can use "on" or "off".
 
-You can also change design of table with CSS.  output HTML tags, *table, td, a, img, p,* have a *class="img\_arc"*. *div* before a image have a class="img\_arc\_img", *div* before text have a class="img\_arc\_text". And if you show posts' date, on design=1 and 2, *p* before the post date have a class="img\_arc\_date".
+You can also change design of outputted table with CSS.  output HTML tags, *table, td, a, img, p,* have a *class="img\_arc"*. *div* before a image have a class="img\_arc\_img", *div* before text have a class="img\_arc\_text". And if you show posts' date, on design=1 and 2, *p* before the post date have a class="img\_arc\_date".
 
 = CSS example =
 
@@ -90,6 +90,10 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 
 == Changelog ==
+
+= 0.34 =
+* Change a part of output in design=3 from <p> to <div>.
+* Change output. If a post have several categories or tags and you set several numbers to *term\_id*, the image of the post appears only once.
 
 = 0.33 =
 * Default "str" attributes, now "str=%".
