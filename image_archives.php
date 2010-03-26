@@ -2,8 +2,8 @@
 /*
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/11/10/image-archives/
- Description: Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
- Version: 0.34
+ Description: Show images that you searched in your database, and the images are linked to the permalink of the post that the images are attached to.
+ Version: 0.40
  Author: coppola
  Author URI: http://if-music.be/
  */
@@ -27,6 +27,9 @@
 
 class image_archives {
 	
+	var $v_first_image_mode;
+	var $v_image_order_by;
+	var $v_image_order;
 	var $v_term_id;
 	var $v_order_by;
 	var $v_order;
@@ -45,6 +48,9 @@ class image_archives {
 	function image_archives_shortcode ( $atts, $content = null ) {
 		
 		extract( shortcode_atts( array(
+			'first_image_mode'	=>	'off',
+			'image_order_by'	=>	'date',
+			'image_order'		=>	'ASC',
 			'term_id'		=>	'1',
 			'order_by'		=>	'title',
 			'order'			=>	'ASC',
@@ -61,51 +67,46 @@ class image_archives {
 		
 		//Substitution
 		
+		//first_image_mode
+			if ( ($first_image_mode == 'on') || ($first_image_mode == 'off') ) $this->v_first_image_mode = $first_image_mode;
+			else return "shortcode atts error. first_image_mode is required to be 'on' or 'off'.";
+		//image_order_by
+			if ($image_order_by == 'title') $this->v_image_order_by = 'p1.post_date';
+			elseif ($image_order_by == 'date') $this->v_image_order_by = 'p1.post_date';
+			else return "shortcode atts error. image_order_by is required to be 'title' or 'date'.";
+		//image_order
+			if ( ($image_order == 'ASC') || ($image_order == 'DESC') ) $this->v_image_order = $image_order;
+			else return "shortcode atts error. image_order is required to be 'ASC' or 'DESC'.";
 		//term_id
-		$this->v_term_id	= $term_id;
+			$this->v_term_id = $term_id;
 		//order_by
-		if ( $order_by == 'title' ) {
-			$this->v_order_by	= 'post_title';
-		} elseif( $order_by == 'date' ) {
-			$this->v_order_by	= 'post_date';
-		} else {
-			return "shortcode atts error. order_by is required to be 'title' or 'date'.";
-		}
+			if ($order_by == 'title') $this->v_order_by = 'post_title';
+			elseif ($order_by == 'date') $this->v_order_by = 'post_date';
+			else return "shortcode atts error. order_by is required to be 'title' or 'date'.";
 		//order
-		if ( ($order == 'ASC') || ($order == 'DESC') ) {
-			$this->v_order = $order;
-		} else {
-			return "shortcode atts error. order is required to be 'ASC' or 'DESC'.";
-		}
+			if ( ($order == 'ASC') || ($order == 'DESC') ) $this->v_order = $order;
+			else return "shortcode atts error. order is required to be 'ASC' or 'DESC'.";
 		//string
-		$this->v_str = $str;
+			$this->v_str = $str;
 		//limit
-		$this->v_limit = $limit;
+			$this->v_limit = $limit;
 		//img_size
-		if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) {
-			$this->v_img_size = $size;
-		} else {
-			return "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
-		}
+			if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) $this->v_img_size = $size;
+			else return "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
 		//design
-		$this->v_design = intval( $design );
+			$this->v_design = intval( $design );
 		//item
-		$this->v_item = intval( $item );
+			$this->v_item = intval( $item );
 		//column
-		if ( $column < 1 ) {
-			return "the number of 'column' is required to be larger than 0.";
-		} elseif( $column > 100 ) {
-			return "the number of 'column' is too big.";
-		}
-		$this->v_column = intval( $column );
+			$column = intval( $column );
+			if ( $column < 1 ) return "the number of 'column' is required to be larger than 0.";
+			elseif( $column > 100 ) return "the number of 'column' is too big.";
+			$this->v_column = $column;
 		//date format
-		$this->v_date_format = $date_format;
+			$this->v_date_format = $date_format;
 		//date show
-		if ( ($date_show == on) || ( $date_show == off) ) {
-			$this->v_date_show = $date_show;
-		} else {
-			return "date_show is required to be 'on' or 'off'.";
-		}
+			if ( ($date_show == on) || ($date_show == off) ) $this->v_date_show = $date_show;
+			else return "date_show is required to be 'on' or 'off'.";
 		
 		return $this->image_archives_output();
 		
@@ -117,6 +118,9 @@ class image_archives {
 	function image_archives_template_tag ( $args = '' ) {
 		
 		$default = array (
+			'first_image_mode'	=>	'off',
+			'image_order_by'	=>	'date',
+			'image_order'		=>	'ASC',
 			'term_id'		=>	'1',
 			'order_by'		=>	'title',
 			'order'			=>	'ASC',
@@ -137,52 +141,49 @@ class image_archives {
 		
 		//Substitution
 		
+		//first_image_mode
+			if ( ($first_image_mode == 'on') || ($first_image_mode == 'off') ) $this->v_first_image_mode = $first_image_mode;
+			else echo "shortcode atts error. first_image_mode is required to be 'on' or 'off'.";
+		//image_order_by
+			if ($image_order_by == 'title') $this->v_image_order_by = 'p1.post_date';
+			elseif ($image_order_by == 'date') $this->v_image_order_by = 'p1.post_date';
+			else echo "shortcode atts error. image_order_by is required to be 'title' or 'date'.";
+		//image_order
+			if ( ($image_order == 'ASC') || ($image_order == 'DESC') ) $this->v_image_order = $image_order;
+			else echo "shortcode atts error. image_order is required to be 'ASC' or 'DESC'.";
 		//term_id
-		$this->v_term_id	= $term_id;
+			$this->v_term_id = $term_id;
 		//order_by
-		if ( $order_by == 'title' ) {
-			$this->v_order_by	= 'post_title';
-		} elseif( $order_by == 'date' ) {
-			$this->v_order_by	= 'post_date';
-		} else {
-			echo "shortcode atts error. order_by is required to be 'title' or 'date'.";
-		}
+			if ($order_by == 'title') $this->v_order_by = 'post_title';
+			elseif ($order_by == 'date') $this->v_order_by = 'post_date';
+			else echo "shortcode atts error. order_by is required to be 'title' or 'date'.";
 		//order
-		if ( ($order == 'ASC') || ($order == 'DESC') ) {
-			$this->v_order = $order;
-		} else {
-			echo "shortcode atts error. order is required to be 'ASC' or 'DESC'.";
-		}
+			if ( ($order == 'ASC') || ($order == 'DESC') ) $this->v_order = $order;
+			else echo "shortcode atts error. order is required to be 'ASC' or 'DESC'.";
 		//string
-		$this->v_str = $str;
+			$this->v_str = $str;
 		//limit
-		$this->v_limit = $limit;
+			$this->v_limit = $limit;
 		//img_size
-		if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) {
-			$this->v_img_size = $size;
-		} else {
-			echo "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
-		}
+			if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) $this->v_img_size = $size;
+			else echo "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
 		//design
-		$this->v_design = intval( $design );
+			$this->v_design = intval( $design );
 		//item
-		$this->v_item = intval( $item );
+			$this->v_item = intval( $item );
 		//column
-		if ( $column < 1 ) {
-			echo "the number of 'column' is required to be larger than 0.";
-		} elseif( $column > 100 ) {
-			echo "the number of 'column' is too big.";
-		}
-		$this->v_column = intval( $column );
+			$column = intval( $column );
+			if ( $column < 1 ) echo "the number of 'column' is required to be larger than 0.";
+			elseif( $column > 100 ) echo "the number of 'column' is too big.";
+			$this->v_column = $column;
 		//date format
-		$this->v_date_format = $date_format;
+			$this->v_date_format = $date_format;
 		//date show
-		if ( ($date_show == 'on') || ( $date_show == 'off') ) {
-			$this->v_date_show = $date_show;
-		} else {
-			echo "date_show is required to be 'on' or 'off'.";
-		}
+			if ( ($date_show == on) || ($date_show == off) ) $this->v_date_show = $date_show;
+			else echo "date_show is required to be 'on' or 'off'.";
 		
+		
+		//important
 		echo $this->image_archives_output();
 	}
 	
@@ -191,23 +192,47 @@ class image_archives {
 		
 		global $wpdb;
 		
-		$query =
-			  "SELECT SQL_CALC_FOUND_ROWS DISTINCT p1.ID as img_post_id, p1.post_parent as parent_id, $wpdb->posts.post_title as post_title, $wpdb->posts.post_date as post_date"
-			. " FROM $wpdb->posts as p1"
-			. " LEFT JOIN $wpdb->term_relationships ON ($wpdb->term_relationships.object_id = p1.post_parent)"
-			. " LEFT JOIN $wpdb->postmeta ON (p1.ID = $wpdb->postmeta.post_id)"
-			. " LEFT JOIN $wpdb->posts ON ($wpdb->posts.ID = p1.post_parent)"
-			. " WHERE p1.post_mime_type LIKE 'image%'"
-			. " AND p1.post_status = 'inherit'"
-			. " AND $wpdb->postmeta.meta_key = '_wp_attached_file'"
-			. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
-			. " AND $wpdb->term_relationships.term_taxonomy_id IN (". $wpdb->escape( $this->v_term_id ) .")"
-			. " AND $wpdb->posts.post_status = 'publish'"
-			. " ORDER BY ". $wpdb->escape( $this->v_order_by ) ." ". $wpdb->escape( $this->v_order )
-			. " LIMIT ". $wpdb->escape( $this->v_limit );
+		if ($this->v_first_image_mode == 'off') {
 		
-		$query_array = $wpdb->get_results($query, ARRAY_A);
-		// この結果、query_array[ img_post_id / parent_id / post_title / post_date ]
+			$query	= "SELECT SQL_CALC_FOUND_ROWS DISTINCT p1.ID AS image_post_id, p1.post_parent AS parent_article_id, $wpdb->posts.post_title, $wpdb->posts.post_date"
+				. " FROM $wpdb->posts AS p1"
+				. " RIGHT JOIN $wpdb->term_relationships ON ($wpdb->term_relationships.object_id = p1.post_parent)"
+				. " RIGHT JOIN $wpdb->posts ON ($wpdb->posts.ID = p1.post_parent)"
+				. " WHERE p1.post_mime_type LIKE 'image%'"
+				. " AND p1.post_type = 'attachment'"
+				. " AND p1.post_status = 'inherit'"
+				. " AND $wpdb->posts.post_status = 'publish'"
+				. " AND $wpdb->term_relationships.term_taxonomy_id IN (". $wpdb->escape( $this->v_term_id ) .")"
+				. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
+				. " ORDER BY ". $wpdb->escape( $this->v_order_by ) ." ". $wpdb->escape( $this->v_order )
+				. " LIMIT ". $wpdb->escape( $this->v_limit );
+			
+			$query_array = $wpdb->get_results($query, ARRAY_A);
+			// 　query_array[ROW][ image_post_id / parent_article_id / post_title / post_date ]
+			
+		} elseif ($this->v_first_image_mode == 'on') {
+			
+			$query2	= "SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT p1.ID AS image_post_id, p1.post_title AS image_post_title, p1.post_parent AS parent_article_id, $wpdb->posts.post_title, $wpdb->posts.post_date"
+				. " FROM $wpdb->posts AS p1"
+				. " RIGHT JOIN $wpdb->term_relationships ON ($wpdb->term_relationships.object_id = p1.post_parent)"
+				. " RIGHT JOIN $wpdb->posts ON ($wpdb->posts.ID = p1.post_parent)"
+				. " WHERE p1.post_mime_type LIKE 'image%'"
+				. " AND p1.post_type = 'attachment'"
+				. " AND p1.post_status = 'inherit'"
+				. " AND $wpdb->posts.post_status = 'publish'"
+				. " AND $wpdb->term_relationships.term_taxonomy_id IN (". $wpdb->escape( $this->v_term_id ) .")"
+				. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
+				. " ORDER BY ". $wpdb->escape( $this->v_image_order_by ) ." ". $wpdb->escape( $this->v_image_order ) .") AS m1"
+				. " GROUP BY parent_article_id"
+				. " ORDER BY ". $wpdb->escape( $this->v_order_by ) ." ". $wpdb->escape( $this->v_order )
+				. " LIMIT ". $wpdb->escape( $this->v_limit );
+				
+			//echo $query2;
+			$query2_array = $wpdb->get_results($query2, ARRAY_A);
+			// query2_array[ROW][ image_post_id / parent_article_id / post_title / post_date ]
+			
+			//var_dump($query2_array);
+		}
 		
 		$row_count = $wpdb->num_rows;
 		
@@ -215,8 +240,9 @@ class image_archives {
 		//$query_count = "SELECT FOUND_ROWS();";
 		//$row_count = $wpdb->get_var($query_count);
 		
-		if(is_array($query_array)) {
-			return $query_array;
+		if( is_array($query_array) || is_array($query2_array) ) {
+			if($this->v_first_image_mode == 'off') return $query_array;
+			if($this->v_first_image_mode == 'on') return $query2_array;
 		} else {
 			return false;
 		}
@@ -227,7 +253,7 @@ class image_archives {
 		//send query
 		$arr = $this->image_archives_query( $count );
 		
-		if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' don't exist, or 'limit' may be wrong.";
+		if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 		
 		//echo "all count: $count";
 		
@@ -238,14 +264,14 @@ class image_archives {
 			$output = "<table class='img_arc'><tbody>\n";
 			
 			for ($i=0; $arr[$i] !== NULL; $i++) {
-				$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
+				$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 				
 				$output .= "  <tr>\n"
 				 	.  "    <td class='img_arc'>\n"
-					.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
+					.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 					.  "    </td>\n"
 					.  "    <td class='img_arc'>\n"
-					.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
+					.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 				if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 				$output .= "      </div>\n"
 					.  "    </td>\n"
@@ -261,12 +287,12 @@ class image_archives {
 				$output = "<table class='img_arc'><tbody>\n";
 				
 				for ($i=0; $arr[$i] !== NULL; $i++) {
-					$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
+					$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 					
 					$output .= "  <tr>\n"
 						.  "    <td class='img_arc'>\n"
-						.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
-						.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
+						.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
+						.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 					if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 					$output .= "      </div>\n"
 						.  "    </td>\n"
@@ -280,12 +306,12 @@ class image_archives {
 				$output = "<table class='img_arc'><tbody>\n";
 				
 				for ($i=0; $arr[$i] !== NULL; $i++) {
-					$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
+					$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 					
 					if ( $i % $this->v_column == 0 ) $output .= "  <tr>\n";
 					$output .= "    <td class='img_arc'>\n"
-						.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
-						.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
+						.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
+						.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 					if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 					$output	.= "      </div>\n"
 						.  "    </td>\n";
@@ -305,10 +331,10 @@ class image_archives {
 			$output = "<div class='img_arc'>\n";
 			
 			for ($i=0; $arr[$i] !== NULL; $i++) {
-				$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
+				$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 				
-				$output .= "  <div><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a>\n"
-					.  "    <a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a>";
+				$output .= "  <div><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a>\n"
+					.  "    <a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a>";
 				if ( $this->v_date_show == 'on' ) $output .= "  ( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )" ;
 				$output .= "  </div>\n";
 			}
@@ -354,12 +380,12 @@ class image_archives {
 					// $cr is a number of images per a page.
 					for ( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] !== NULL ) ; $cr++) {
 						
-						$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
+						$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 						
 						if ( $cr % $this->v_column == 0 ) $output .= "  <tr>\n";
 						$output .= "    <td class='img_arc'>\n"
-							.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
-							.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
+							.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
+							.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 						if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 						$output	.= "      </div>\n"
 							.  "    </td>\n";
@@ -432,12 +458,12 @@ class image_archives {
 					// $cr is a calculated number of images per a page.
 					for ( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] !== NULL ) ; $cr++) {
 						
-						$img_src = wp_get_attachment_image_src( $arr[$i][img_post_id], $this->v_img_size );
+						$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 						
 						if ( $cr % $this->v_column == 0 ) $output .= "  <tr>\n";
 						$output .= "    <td class='img_arc'>\n"
-							.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
-							.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_id]) ."'>". $arr[$i][post_title] ."</a></p>";
+							.  "      <div class='img_arc_img'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'><img class='img_arc' src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
+							.  "      <div class='img_arc_text'><p class='img_arc'><a class='img_arc' href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></p>";
 						if ( $this->v_date_show == 'on' ) $output .= "<p class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</p>" ;
 						$output	.= "      </div>\n"
 							.  "    </td>\n";

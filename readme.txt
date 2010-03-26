@@ -6,7 +6,7 @@ Requires at least: 2.0
 Tested up to: 2.9.2
 Stable tag: trunk
 
-Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
+Show images that you searched in your database, and the images are linked to the permalink of the post that the images are attached to.
 
 
 == Description ==
@@ -32,8 +32,16 @@ You can also use the function of this plugin. In order to use the function, writ
 
 wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 
+Added the first\_image\_mode. Without configure the search strings you can search a image in a post, and show a image per post. If you want to show the images of your posts easily, use this feature.
+
+\[image\_archives first\_image\_mode=on\]
+
+The 'first' image means your 'first' uploaded image in the post. If you want to show the first image that is sorted by filename, use *image\_order\_by=title*. You can also use *image\_order=DESC*. If you use DESC, the latest image in the post is showed.
 
 = Default values =
+* first_image_mode = off
+* image_order_by = date
+* image_order = ASC
 * term\_id = 1
 * order\_by = title
 * order = ASC
@@ -47,9 +55,12 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * date\_show = off
 
 = explanation =
+* **first\_image\_mode** is the feature you can show a image per post without configuring the search strings. Default setting of this feature is off. If you configure first\_image\_mode=on, you can use below two settings.
+* **image\_order\_by** is the method of ordering the searched images.  You can use "title" or "date". This attribute is effective only when first\_image\_mode is on.
+* **image\_order** requires the sort type. You can use "ASC" or "DESC". Uppercase only. This attribute is effective only when first\_image\_mode is on.
 * **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
-* **order\_by** is a method of ordering a list of the images.  You can use "title" or "date".
-* **order** requires a sort type. You can use "ASC" or "DESC". Uppercase only.
+* **order\_by** is the method of ordering a list of the images(posts).  You can use "title" or "date".
+* **order** requires the sort type. You can use "ASC" or "DESC". Uppercase only.
 * **str** is a search string. The search string must be a part of the file name of images you uploaded. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
 * **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
@@ -91,8 +102,11 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 == Changelog ==
 
+= 0.40 =
+* Added the first image mode. Without configure the search strings you can search a image in a post, and show a image per post.
+
 = 0.34 =
-* Change a part of output in design=3 from <p> to <div>.
+* Change a part of output in design=3 from <p\> to <div\>.
 * Change output. If a post have several categories or tags and you set several numbers to *term\_id*, the image of the post appears only once.
 
 = 0.33 =
