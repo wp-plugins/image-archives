@@ -53,6 +53,7 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 * column = 3
 * date\_format = Y-m-d
 * date\_show = off
+* title\_show = on
 
 = explanation =
 * **first\_image\_mode** is the feature you can show a image per post without configuring the search strings. Default setting of this feature is off. If you configure first\_image\_mode=on, you can use below two settings.
@@ -69,8 +70,9 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 * **column** is the number of columns. This attribute is enabled only when "design=2,4,5".
 * **date\_format** is the date format. Please refer to [PHP.net date format](http://php.net/manual/en/function.date.php).
 * **date\_show** is a switch to show posts' date or not. You can use "on" or "off".
+* **title\_show** is a switch to show posts' title or not. You can use "on" or "off".
 
-You can also change design of outputted table with CSS.  output HTML tags, *table, td, a, img, p,* have a *class="img\_arc"*. *div* before a image have a class="img\_arc\_img", *div* before text have a class="img\_arc\_text". And if you show posts' date, on design=1 and 2, *p* before the post date have a class="img\_arc\_date".
+You can also change design of outputted table with CSS. output HTML tags, *table, div* have a *class="img\_arc"*. *div* before a image have a class="img\_arc\_img", *div* before text have a class="img\_arc\_text".
 
 = CSS example =
 
@@ -83,7 +85,7 @@ div.img\_arc\_img, div.img\_arc\_text { <br />
 &nbsp;&nbsp;line-height: 1; <br />
 }
 
-a.img\_arc { <br />
+div.img\_arc_text a { <br />
 &nbsp;&nbsp;text-decoration: none; <br />
 }
 
@@ -97,10 +99,15 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 
 == Screenshots ==
-1. Output designs of 1-3.
+1. Output designs of 1-3. Please be careful, this is old.
 
 
 == Changelog ==
+
+= 0.41 =
+* Changed the output source. Some output tags were changed not to have ' img_arc' class.
+* Added 'title\_show' attribute.
+
 
 = 0.40 =
 * Added the first image mode. Without configure the search strings you can search a image in a post, and show a image per post.
