@@ -56,8 +56,8 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 
 = explanation =
 * **first\_image\_mode** is the feature you can show a image per post without configuring the search strings. Default setting of this feature is off. If you configure first\_image\_mode=on, you can use below two settings.
-* **image\_order\_by** is the method of ordering the searched images.  You can use "title" or "date". This attribute is effective only when first\_image\_mode is on.
-* **image\_order** requires the sort type. You can use "ASC" or "DESC". Uppercase only. This attribute is effective only when first\_image\_mode is on.
+* **image\_order\_by** is the method of ordering the searched images.  You can use "title" or "date". This attribute is enabled only when first\_image\_mode is on.
+* **image\_order** requires the sort type. You can use "ASC" or "DESC". Uppercase only. This attribute is enabled only when first\_image\_mode is on.
 * **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
 * **order\_by** is the method of ordering a list of the images(posts).  You can use "title" or "date".
 * **order** requires the sort type. You can use "ASC" or "DESC". Uppercase only.
