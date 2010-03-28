@@ -6,19 +6,19 @@ Requires at least: 2.0
 Tested up to: 2.9.2
 Stable tag: trunk
 
-Show images that you searched in your database, and the images are linked to the permalink of the post that the images are attached to.
+Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
 
 
 == Description ==
 First of all, sorry for my bad English.
 
-Show images that you searched in your database, and the images are linked to the permalink of posts that the images are attached to.
+Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
 
 [Sample](http://if-music.be/2009/11/10/image-archives/)
 
 = NOTICE =
-* The images that you want to show is needed to be attached to posts.
-* In order to link to the permalink of a post, its post is required to be "published".
+* The images that you want to show is needed to be attached to posts they were published in.
+* In order to link to the permalink of a post, the post must be "published".
 
 = HOW TO USE =
 Write shortcode "\[image\_archives\]" in the place you want to show the image archives.
