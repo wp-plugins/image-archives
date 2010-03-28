@@ -2,7 +2,7 @@
 /*
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/11/10/image-archives/
- Description: Show images that you searched in your database, and the images are linked to the permalink of the post that the images are attached to.
+ Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
  Version: 0.41
  Author: coppola
  Author URI: http://if-music.be/
