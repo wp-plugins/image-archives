@@ -106,6 +106,9 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 == Changelog ==
 
+= 0.52 =
+* Fixed a cache bug.
+
 = 0.51 =
 * Fixed the parse_ini_ file error. sorry.
 
