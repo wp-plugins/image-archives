@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/11/10/image-archives/
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.50
+ Version: 0.51
  Author: coppola
  Author URI: http://if-music.be/
  */
@@ -227,7 +227,8 @@ class image_archives {
 			."design = \""		.$this->v_design		."\"\n"
 			."date_format = \""	.$this->v_date_format		."\"\n"
 			."date_show = \""	.$this->v_date_show		."\"\n"
-			."title_show = \""	.$this->v_title_show		."\"\n";
+			."title_show = \""	.$this->v_title_show		."\"\n"
+			."cache = \""		.$this->v_cache			."\"\n";
 		
 		if( $fp = fopen( $file, 'w' ) ) {
 			flock( $fp, LOCK_EX );
@@ -246,7 +247,9 @@ class image_archives {
 		
 		$file = WP_PLUGIN_DIR . '/image-archives/settings.ini';
 		
-		$ini = parse_ini_file($file);
+		if( file_exists($file) ) {
+		
+			$ini = parse_ini_file($file);
 		
 			$this->v_first_image_mode	= $ini["first_image_mode"];
 			$this->v_image_order_by		= $ini["image_order_by"];
@@ -263,6 +266,11 @@ class image_archives {
 			$this->v_date_format		= $ini["date_format"];
 			$this->v_date_show		= $ini["date_show"];
 			$this->v_title_show		= $ini["title_show"];
+			$this->v_cache			= $ini["cache"];
+		
+		} else {
+			return false;
+		}
 		
 	}
 	
@@ -352,6 +360,7 @@ class image_archives {
 			
 		} else {
 		
+			$this->image_archives_settings_write();
 			return $this->image_archives_output();
 		
 		}
@@ -378,7 +387,8 @@ class image_archives {
 			. $this->v_design
 			. $this->v_date_format
 			. $this->v_date_show
-			. $this->v_title_show;
+			. $this->v_title_show
+			. $this->v_cache;
 		
 		//echo 'str='.$str;
 		
@@ -414,7 +424,7 @@ class image_archives {
 	
 	function image_archives_cache_update () {
 		
-		$this->image_archives_settings_read();
+		if( $this->image_archives_settings_read() == false ) return;
 		
 		$this->image_archives_cache_file ( $c_dir, $c_file );
 		
