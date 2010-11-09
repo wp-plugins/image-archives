@@ -3,12 +3,12 @@
  Plugin Name: Image Archives
  Plugin URI: http://if-music.be/2009/11/10/image-archives/
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.42
+ Version: 0.50
  Author: coppola
  Author URI: http://if-music.be/
  */
  
-/*  Copyright 2009 coppola (email : coppola@if-music.be)
+/*  Copyright 2010 coppola (email : coppola@if-music.be)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,23 +25,25 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+
 class image_archives {
 	
-	var $v_first_image_mode;
-	var $v_image_order_by;
-	var $v_image_order;
-	var $v_term_id;
-	var $v_order_by;
-	var $v_order;
-	var $v_str;
-	var $v_limit;
-	var $v_img_size;
-	var $v_item;
-	var $v_column;
-	var $v_design;
-	var $v_date_format;
-	var $v_date_show;
-	var $v_title_show;
+	public $v_first_image_mode;
+	public $v_image_order_by;
+	public $v_image_order;
+	public $v_term_id;
+	public $v_order_by;
+	public $v_order;
+	public $v_str;
+	public $v_limit;
+	public $v_img_size;
+	public $v_item;
+	public $v_column;
+	public $v_design;
+	public $v_date_format;
+	public $v_date_show;
+	public $v_title_show;
+	public $v_cache;
 	
 	
 	// shortcode function
@@ -64,6 +66,7 @@ class image_archives {
 			'date_format'		=>	'Y-m-d',
 			'date_show'		=>	'off',
 			'title_show'		=>	'on',
+			'cache'			=>	'off'
 		), $atts ) );
 		
 		
@@ -93,7 +96,7 @@ class image_archives {
 		//limit
 			$this->v_limit = $limit;
 		//img_size
-			if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) $this->v_img_size = $size;
+			if ( ($size == 'thumbnail') || ($size == 'medium') || ($size == 'large') || ($size == 'full') ) $this->v_img_size = $size;
 			else return "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
 		//design
 			$this->v_design = intval( $design );
@@ -107,15 +110,19 @@ class image_archives {
 		//date format
 			$this->v_date_format = $date_format;
 		//date show
-			if ( ($date_show == on) || ($date_show == off) ) $this->v_date_show = $date_show;
+			if ( ($date_show == 'on') || ($date_show == 'off') ) $this->v_date_show = $date_show;
 			else return "date_show is required to be 'on' or 'off'.";
 		//title show
-			if ( ($title_show == on) || ($title_show == off) ) $this->v_title_show = $title_show;
+			if ( ($title_show == 'on') || ($title_show == 'off') ) $this->v_title_show = $title_show;
 			else return "title_show is required to be 'on' or 'off'.";
+		//cache
+			if ( ($cache == 'on') || ($cache == 'off') ) $this->v_cache = $cache;
+			else return "cache is required to be 'on' or 'off'.";
 		
-		return $this->image_archives_output();
-		
+		return $this->image_archives_core();
+	
 	}
+	
 	
 	
 	//template tag function
@@ -138,6 +145,7 @@ class image_archives {
 			'date_format'		=>	'Y-m-d',
 			'date_show'		=>	'off',
 			'title_show'		=>	'on',
+			'cache'			=>	'off'
 		);
 		
 		$args = wp_parse_args($args, $default);
@@ -171,7 +179,7 @@ class image_archives {
 		//limit
 			$this->v_limit = $limit;
 		//img_size
-			if ( ($size == thumbnail) || ($size == medium) || ($size == large) || ($size == full) ) $this->v_img_size = $size;
+			if ( ($size == 'thumbnail') || ($size == 'medium') || ($size == 'large') || ($size == 'full') ) $this->v_img_size = $size;
 			else echo "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
 		//design
 			$this->v_design = intval( $design );
@@ -185,15 +193,80 @@ class image_archives {
 		//date format
 			$this->v_date_format = $date_format;
 		//date show
-			if ( ($date_show == on) || ($date_show == off) ) $this->v_date_show = $date_show;
+			if ( ($date_show == 'on') || ($date_show == 'off') ) $this->v_date_show = $date_show;
 			else echo "date_show is required to be 'on' or 'off'.";
 		//title show
-			if ( ($title_show == on) || ($title_show == off) ) $this->v_title_show = $title_show;
+			if ( ($title_show == 'on') || ($title_show == 'off') ) $this->v_title_show = $title_show;
 			else echo "title_show is required to be 'on' or 'off'.";
+		//cache
+			if ( ($cache == 'on') || ($cache == 'off') ) $this->v_cache = $cache;
+			else echo "cache is required to be 'on' or 'off'.";
 		
 		//important
-		echo $this->image_archives_output();
+		echo $this->image_archives_core();
+	
 	}
+	
+	
+	
+	function image_archives_settings_write () {
+		
+		$file = WP_PLUGIN_DIR . '/image-archives/settings.ini';
+		
+		$str =	 "first_image_mode = \"".$this->v_first_image_mode	."\"\n"
+			."image_order_by = \""	.$this->v_image_order_by	."\"\n"
+			."image_order = \""	.$this->v_image_order		."\"\n"
+			."term_id = \""		.$this->v_term_id		."\"\n"
+			."order_by = \""	.$this->v_order_by		."\"\n"
+			."order = \""		.$this->v_order			."\"\n"
+			."str = \""		.$this->v_str			."\"\n"
+			."limit = \""		.$this->v_limit			."\"\n"
+			."img_size = \""	.$this->v_img_size		."\"\n"
+			."item = \""		.$this->v_item			."\"\n"
+			."column = \""		.$this->v_column		."\"\n"
+			."design = \""		.$this->v_design		."\"\n"
+			."date_format = \""	.$this->v_date_format		."\"\n"
+			."date_show = \""	.$this->v_date_show		."\"\n"
+			."title_show = \""	.$this->v_title_show		."\"\n";
+		
+		if( $fp = fopen( $file, 'w' ) ) {
+			flock( $fp, LOCK_EX );
+				fwrite( $fp, $str );
+			flock( $fp, LOCK_UN );
+			fclose($fp);
+		} else {
+			echo 'the settings file cannot be opened or be created.';
+		}
+	
+	}
+	
+	
+	
+	function image_archives_settings_read () {
+		
+		$file = WP_PLUGIN_DIR . '/image-archives/settings.ini';
+		
+		$ini = parse_ini_file($file);
+		print_r($ini);
+		
+			$this->v_first_image_mode	= $ini["first_image_mode"];
+			$this->v_image_order_by		= $ini["image_order_by"];
+			$this->v_image_order		= $ini["image_order"];
+			$this->v_term_id		= $ini["term_id"];
+			$this->v_order_by		= $ini["order_by"];
+			$this->v_order			= $ini["order"];
+			$this->v_str			= $ini["str"];
+			$this->v_limit			= $ini["limit"];
+			$this->v_img_size		= $ini["img_size"];
+			$this->v_item			= $ini["item"];
+			$this->v_column			= $ini["column"];
+			$this->v_design			= $ini["design"];
+			$this->v_date_format		= $ini["date_format"];
+			$this->v_date_show		= $ini["date_show"];
+			$this->v_title_show		= $ini["title_show"];
+		
+	}
+	
 	
 	
 	function image_archives_query( &$row_count = 0 ) {
@@ -255,6 +328,102 @@ class image_archives {
 			return false;
 		}
 	}
+	
+	
+	
+	function image_archives_core () {
+		
+		if( $this->v_cache == 'on' ) {
+			
+			$this->image_archives_settings_write();
+			$this->image_archives_cache_file ( $c_dir, $c_file );
+			
+			if( file_exists($c_file) ) {
+				
+				$content = file_get_contents($c_file);
+				return $content;
+				
+			} else {
+				
+				$this->image_archives_cache_create();
+				$content = file_get_contents($c_file);
+				return $content;
+				
+			}
+			
+		} else {
+		
+			return $this->image_archives_output();
+		
+		}
+	
+	}
+	
+	
+	
+	function image_archives_cache_file ( &$cache_dir, &$cache_file ) {
+		
+		$cache_dir = WP_PLUGIN_DIR . '/image-archives/cache';
+		
+		$str = $this->v_first_image_mode
+			. $this->v_image_order_by
+			. $this->v_image_order
+			. $this->v_term_id
+			. $this->v_order_by
+			. $this->v_order
+			. $this->v_str
+			. $this->v_limit
+			. $this->v_img_size
+			. $this->v_item
+			. $this->v_column
+			. $this->v_design
+			. $this->v_date_format
+			. $this->v_date_show
+			. $this->v_title_show;
+		
+		//echo 'str='.$str;
+		
+		$md5 = md5($str);
+		
+		$cache_file = $cache_dir . '/ia-' . $md5;
+		
+	}
+	
+	
+	
+	function image_archives_cache_create () {
+		
+		$this->image_archives_cache_file ( $c_dir, $c_file );
+		
+		// create cache dir
+		if( !is_dir( $c_dir ) ) {
+			if( !mkdir( $c_dir , 0755 ) ) echo 'failed to creat cache dir.';
+		}
+		
+		if( $fp = fopen( $c_file, 'w' ) ) {
+			flock( $fp, LOCK_EX );
+				fwrite( $fp, $this->image_archives_output() );
+			flock( $fp, LOCK_UN );
+			fclose($fp);
+		} else {
+			echo 'a cache file cannot be opened or be created.';
+		}
+	
+	}
+	
+	
+	
+	function image_archives_cache_update () {
+		
+		$this->image_archives_settings_read();
+		
+		$this->image_archives_cache_file ( $c_dir, $c_file );
+		
+		if( file_exists($c_file) ) $this->image_archives_cache_create();
+		
+	}
+	
+	
 	
 	function image_archives_output () {
 		
@@ -351,7 +520,7 @@ class image_archives {
 			if( $this->v_column > 1)
 			{
 				$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.2.min.js'></script>\n"
-					. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.7.2.custom.min.js'></script>\n"
+					. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.6.custom.min.js'></script>\n"
 					. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_accordion.js'></script>\n"
 					. "<div id='accordion'>";
 				
@@ -422,7 +591,7 @@ class image_archives {
 			if( $this->v_column > 1)
 			{
 				$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.2.min.js'></script>\n"
-					. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.7.2.custom.min.js'></script>\n"
+					. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.6.custom.min.js'></script>\n"
 					. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_tabs.js'></script>\n"
 					. "<div id='tabs'>";
 				
@@ -505,6 +674,9 @@ class image_archives {
 }
 
 
+$image_archives = new image_archives();
+
+
 /******************************************************************************
  * grobal template tag - wp_image_archives()
  *****************************************************************************/
@@ -520,8 +692,15 @@ function wp_image_archives ( $args = '' ) {
  * shortcode - [image_archives]
  *****************************************************************************/
 
-$image_archives = new image_archives();
-add_shortcode( 'image_archives', array ( $image_archives, 'image_archives_shortcode' ));
+add_shortcode( 'image_archives', array( $image_archives, 'image_archives_shortcode' ) );
+
+
+
+/******************************************************************************
+ * add_action hook
+ *****************************************************************************/
+
+add_action( 'wp_insert_post', array( $image_archives, 'image_archives_cache_update' ) );
 
 
 ?>

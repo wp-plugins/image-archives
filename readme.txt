@@ -24,7 +24,7 @@ Image Archives is a wordpress plugin that displays images from your published po
 Write shortcode "\[image\_archives\]" in the place you want to show the image archives.
 And you can set some attributes.
 
-\[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *column=?* *date_format=?* *date_show=?*\]
+\[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *column=?* *date_format=?* *date_show=?* *cache=?*\]
 
 Write only necessary attributes. Default settings are below. Probably you need to configure "str" and "term_id".
 
@@ -54,6 +54,7 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 * date\_format = Y-m-d
 * date\_show = off
 * title\_show = on
+* cache = off
 
 = explanation =
 * **first\_image\_mode** is the feature you can show a image per post without configuring the search strings. Default setting of this feature is off. If you configure first\_image\_mode=on, you can use below two settings.
@@ -71,6 +72,7 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 * **date\_format** is the date format. Please refer to [PHP.net date format](http://php.net/manual/en/function.date.php).
 * **date\_show** is a switch to show posts' date or not. You can use "on" or "off".
 * **title\_show** is a switch to show posts' title or not. You can use "on" or "off".
+* **cache** is a switch to cache the output. You can use "on" or "off". If you set *cache=on*, the output cache will be created in the plugin directory. This cache file will be renewed when you publish a article or edit a article.
 
 You can also change design of outputted table with CSS. output HTML tags, *table, div* have a *class="img\_arc"*. *div* before a image have a class="img\_arc\_img", *div* before text have a class="img\_arc\_text".
 
@@ -104,11 +106,14 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 == Changelog ==
 
+= 0.50 =
+* Added a cache system.
+
 = 0.42 =
 * Fixed some code in design=3.
 
 = 0.41 =
-* Changed the output source. Some output tags were changed not to have ' img_arc' class.
+* Changed the output source. Some output tags were changed not to have 'img_arc' class.
 * Added 'title\_show' attribute.
 
 
