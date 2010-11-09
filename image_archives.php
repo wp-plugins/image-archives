@@ -247,7 +247,6 @@ class image_archives {
 		$file = WP_PLUGIN_DIR . '/image-archives/settings.ini';
 		
 		$ini = parse_ini_file($file);
-		print_r($ini);
 		
 			$this->v_first_image_mode	= $ini["first_image_mode"];
 			$this->v_image_order_by		= $ini["image_order_by"];
