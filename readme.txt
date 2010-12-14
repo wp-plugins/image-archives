@@ -1,9 +1,9 @@
 === Image Archives ===
 Contributors: coppola00
 Donate link: 
-Tags: image, archive, post list, list, thumbnail, jQuery
+Tags: image, archive, post list, list, thumbnail, jQuery, jQuery UI, Accordion
 Requires at least: 2.0
-Tested up to: 3.0.2
+Tested up to: 3.0.3
 Stable tag: trunk
 
 Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
@@ -55,6 +55,9 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 * date\_show = off
 * title\_show = on
 * cache = off
+* section_name = Section
+* section_sort = number
+* section_result_number_show = on
 
 = explanation =
 * **first\_image\_mode** is the feature you can show a image per post without configuring the search strings. Default setting of this feature is off. If you configure first\_image\_mode=on, you can use below two settings.
@@ -73,6 +76,9 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 * **date\_show** is a switch to show posts' date or not. You can use "on" or "off".
 * **title\_show** is a switch to show posts' title or not. You can use "on" or "off".
 * **cache** is a switch to cache the output. You can use "on" or "off". If you set *cache=on*, the output cache will be created in the plugin directory. This cache file will be renewed when you publish a article or edit a article.
+* **section_name** is the section name in design=4,5. You can change the section name as you like.
+* **section_sort** is the method of sorting section in design=4,5. You can set "number" or "category" to this attribute. If you set "category" to this attribute, "limit" will be the limit number of images per a category. And please be careful, section_sort=category take a while, so I recommend that you should use "cache=on" at the same time. As for the order of categories, it is ordered by "term_id" you set. If you set "term_id=2,4,6", the order of the categories is "2,4,6". So if you want to change the order, you should set it like "term_id=6,2,4".
+* **section_result_number_show** is a switch to show the number of your search result. You can set "on" or "off". But this attribute is effective in design=4,5 and section_sort=number.
 
 You can also change design of outputted table with CSS. output HTML tags, *table, div* have a *class="img\_arc"*. *div* before a image have a class="img\_arc\_img", *div* before text have a class="img\_arc\_text".
 
@@ -105,6 +111,12 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 
 == Changelog ==
+
+= 0.60 =
+* Added a config "section_name". You can change section name in design = 4 or 5.
+* Added a config "section_sort". You can sort the result by category in design = 4 or 5.
+* Added a config "section_result_number_show". You can hide the result number in design = 4 or 5.
+* Updated jQuery and jQuery UI files.
 
 = 0.53 =
 * Change the plugin page.
