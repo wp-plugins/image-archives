@@ -112,6 +112,9 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 == Changelog ==
 
+= 0.61 =
+* Fix the short code for this plugin.
+
 = 0.60 =
 * Added a config "section_name". You can change section name in design = 4 or 5.
 * Added a config "section_sort". You can sort the result by category in design = 4 or 5.

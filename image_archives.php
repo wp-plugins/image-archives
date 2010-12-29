@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://everything.ismusic.in/2010/12/image-archives/
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.60
+ Version: 0.61
  Author: Nomeu
  Author URI: http://everything.ismusic.in/
  */
@@ -79,30 +79,30 @@ class image_archives {
 		//Substitution
 		
 		//first_image_mode
-			if( ($first_image_mode === 'on') || ($first_image_mode === 'off') ) $this->v_first_image_mode = $first_image_mode;
+			if( ($first_image_mode == 'on') || ($first_image_mode == 'off') ) $this->v_first_image_mode = $first_image_mode;
 			else return "shortcode atts error. first_image_mode is required to be 'on' or 'off'.";
 		//image_order_by
-			if( $image_order_by === 'title' ) $this->v_image_order_by = 'p1.post_date';
-			elseif( $image_order_by === 'date' ) $this->v_image_order_by = 'p1.post_date';
+			if( $image_order_by == 'title' ) $this->v_image_order_by = 'p1.post_date';
+			elseif( $image_order_by == 'date' ) $this->v_image_order_by = 'p1.post_date';
 			else return "shortcode atts error. image_order_by is required to be 'title' or 'date'.";
 		//image_order
-			if( ($image_order === 'ASC') || ($image_order === 'DESC') ) $this->v_image_order = $image_order;
+			if( ($image_order == 'ASC') || ($image_order == 'DESC') ) $this->v_image_order = $image_order;
 			else return "shortcode atts error. image_order is required to be 'ASC' or 'DESC'.";
 		//term_id
 			$this->v_term_id = $term_id;
 		//order_by
-			if( $order_by === 'title' ) $this->v_order_by = 'post_title';
-			elseif( $order_by === 'date' ) $this->v_order_by = 'post_date';
+			if( $order_by == 'title' ) $this->v_order_by = 'post_title';
+			elseif( $order_by == 'date' ) $this->v_order_by = 'post_date';
 			else return "shortcode atts error. order_by is required to be 'title' or 'date'.";
 		//order
-			if( ($order === 'ASC') || ($order === 'DESC') ) $this->v_order = $order;
+			if( ($order == 'ASC') || ($order == 'DESC') ) $this->v_order = $order;
 			else return "shortcode atts error. order is required to be 'ASC' or 'DESC'.";
 		//string
 			$this->v_str = $str;
 		//limit
 			$this->v_limit = $limit;
 		//img_size
-			if( ($size === 'thumbnail') || ($size === 'medium') || ($size === 'large') || ($size === 'full') ) $this->v_img_size = $size;
+			if( ($size == 'thumbnail') || ($size == 'medium') || ($size == 'large') || ($size == 'full') ) $this->v_img_size = $size;
 			else return "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'.";
 		//design
 			$this->v_design = intval( $design );
@@ -116,21 +116,21 @@ class image_archives {
 		//date format
 			$this->v_date_format = $date_format;
 		//date show
-			if( ($date_show === 'on') || ($date_show === 'off') ) $this->v_date_show = $date_show;
+			if( ($date_show == 'on') || ($date_show == 'off') ) $this->v_date_show = $date_show;
 			else return "date_show is required to be 'on' or 'off'.";
 		//title show
-			if( ($title_show === 'on') || ($title_show === 'off') ) $this->v_title_show = $title_show;
+			if( ($title_show == 'on') || ($title_show == 'off') ) $this->v_title_show = $title_show;
 			else return "title_show is required to be 'on' or 'off'.";
 		//cache
-			if( ($cache === 'on') || ($cache === 'off') ) $this->v_cache = $cache;
+			if( ($cache == 'on') || ($cache == 'off') ) $this->v_cache = $cache;
 			else return "cache is required to be 'on' or 'off'.";
 		//section_name
 			$this->v_section_name = htmlspecialchars($section_name);
 		//section_sort
-			if( ($section_sort === 'category') || ($section_sort === 'number') ) $this->v_section_sort = $section_sort;
+			if( ($section_sort == 'category') || ($section_sort == 'number') ) $this->v_section_sort = $section_sort;
 			else return "section_sort is required to be 'category' or 'number'";
 		//section_result_number_show
-			if( ($section_result_number_show === 'on') || ($section_result_number_show === 'off') ) $this->v_section_result_number_show = $section_result_number_show;
+			if( ($section_result_number_show == 'on') || ($section_result_number_show == 'off') ) $this->v_section_result_number_show = $section_result_number_show;
 			else return "section_result_number_show is required to be 'on' or 'off'";
 		
 		return $this->image_archives_core();
@@ -173,30 +173,30 @@ class image_archives {
 		//Substitution
 		
 		//first_image_mode
-			if( ($first_image_mode === 'on') || ($first_image_mode === 'off') ) $this->v_first_image_mode = $first_image_mode;
+			if( ($first_image_mode == 'on') || ($first_image_mode == 'off') ) $this->v_first_image_mode = $first_image_mode;
 			else { echo "shortcode atts error. first_image_mode is required to be 'on' or 'off'."; return; }
 		//image_order_by
-			if( $image_order_by === 'title' ) $this->v_image_order_by = 'p1.post_date';
-			elseif( $image_order_by === 'date' ) $this->v_image_order_by = 'p1.post_date';
+			if( $image_order_by == 'title' ) $this->v_image_order_by = 'p1.post_date';
+			elseif( $image_order_by == 'date' ) $this->v_image_order_by = 'p1.post_date';
 			else { echo "shortcode atts error. image_order_by is required to be 'title' or 'date'."; return; }
 		//image_order
-			if( ($image_order === 'ASC') || ($image_order === 'DESC') ) $this->v_image_order = $image_order;
+			if( ($image_order == 'ASC') || ($image_order == 'DESC') ) $this->v_image_order = $image_order;
 			else { echo "shortcode atts error. image_order is required to be 'ASC' or 'DESC'."; return; }
 		//term_id
 			$this->v_term_id = $term_id;
 		//order_by
-			if( $order_by === 'title' ) $this->v_order_by = 'post_title';
-			elseif( $order_by === 'date' ) $this->v_order_by = 'post_date';
+			if( $order_by == 'title' ) $this->v_order_by = 'post_title';
+			elseif( $order_by == 'date' ) $this->v_order_by = 'post_date';
 			else { echo "shortcode atts error. order_by is required to be 'title' or 'date'."; return; }
 		//order
-			if( ($order === 'ASC') || ($order === 'DESC') ) $this->v_order = $order;
+			if( ($order == 'ASC') || ($order == 'DESC') ) $this->v_order = $order;
 			else { echo "shortcode atts error. order is required to be 'ASC' or 'DESC'."; return; }
 		//string
 			$this->v_str = $str;
 		//limit
 			$this->v_limit = $limit;
 		//img_size
-			if( ($size === 'thumbnail') || ($size === 'medium') || ($size === 'large') || ($size === 'full') ) $this->v_img_size = $size;
+			if( ($size == 'thumbnail') || ($size == 'medium') || ($size == 'large') || ($size == 'full') ) $this->v_img_size = $size;
 			else { echo "shortcode atts error. size is required to be 'thumbnail' or 'medium' or 'large' or 'full'."; return; }
 		//design
 			$this->v_design = intval( $design );
@@ -210,21 +210,21 @@ class image_archives {
 		//date format
 			$this->v_date_format = $date_format;
 		//date show
-			if( ($date_show === 'on') || ($date_show === 'off') ) $this->v_date_show = $date_show;
+			if( ($date_show == 'on') || ($date_show == 'off') ) $this->v_date_show = $date_show;
 			else { echo "date_show is required to be 'on' or 'off'."; return; }
 		//title show
-			if( ($title_show === 'on') || ($title_show === 'off') ) $this->v_title_show = $title_show;
+			if( ($title_show == 'on') || ($title_show == 'off') ) $this->v_title_show = $title_show;
 			else { echo "title_show is required to be 'on' or 'off'."; return; }
 		//cache
-			if( ($cache === 'on') || ($cache === 'off') ) $this->v_cache = $cache;
+			if( ($cache == 'on') || ($cache == 'off') ) $this->v_cache = $cache;
 			else { echo "cache is required to be 'on' or 'off'."; return; }
 		//section_name
 			$this->v_section_name = htmlspecialchars($section_name);
 		//section_sort
-			if( ($section_sort === 'category') || ($section_sort === 'number') ) $this->v_section_sort = $section_sort;
+			if( ($section_sort == 'category') || ($section_sort == 'number') ) $this->v_section_sort = $section_sort;
 			else { echo "section_sort is required to be 'category' or 'number'"; return; }
 		//section_result_number_show
-			if( ($section_result_number_show === 'on') || ($section_result_number_show === 'off') ) $this->v_section_result_number_show = $section_result_number_show;
+			if( ($section_result_number_show == 'on') || ($section_result_number_show == 'off') ) $this->v_section_result_number_show = $section_result_number_show;
 			else { echo "section_result_number_show is required to be 'on' or 'off'"; return; }
 		//important
 		echo $this->image_archives_core();
@@ -312,7 +312,7 @@ class image_archives {
 		
 		global $wpdb;
 		
-		if( $this->v_first_image_mode === 'off' ) {
+		if( $this->v_first_image_mode == 'off' ) {
 			
 			$query	= "SELECT SQL_CALC_FOUND_ROWS DISTINCT p1.ID AS image_post_id, p1.post_parent AS parent_article_id, $wpdb->posts.post_title, $wpdb->posts.post_date"
 					. " FROM $wpdb->posts AS p1"
@@ -330,7 +330,7 @@ class image_archives {
 			$query_array = $wpdb->get_results($query, ARRAY_A);
 			// query_array[ROW][ image_post_id / parent_article_id / post_title / post_date ]
 			
-		} elseif( $this->v_first_image_mode === 'on' ) {
+		} elseif( $this->v_first_image_mode == 'on' ) {
 			
 			$query2	= "SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT p1.ID AS image_post_id, p1.post_title AS image_post_title, p1.post_parent AS parent_article_id, $wpdb->posts.post_title, $wpdb->posts.post_date"
 					. " FROM $wpdb->posts AS p1"
@@ -360,8 +360,8 @@ class image_archives {
 		//$row_count = $wpdb->get_var($query_count);
 		
 		if( is_array($query_array) || is_array($query2_array) ) {
-			if( $this->v_first_image_mode === 'off' ) return $query_array;
-			if( $this->v_first_image_mode === 'on' ) return $query2_array;
+			if( $this->v_first_image_mode == 'off' ) return $query_array;
+			if( $this->v_first_image_mode == 'on' ) return $query2_array;
 		} else {
 			return false;
 		}
@@ -372,7 +372,7 @@ class image_archives {
 	
 	function image_archives_core () {
 		
-		if( $this->v_cache === 'on' ) {
+		if( $this->v_cache == 'on' ) {
 			
 			$this->image_archives_settings_write();
 			$this->image_archives_cache_file ( $c_dir, $c_file );
@@ -464,11 +464,11 @@ class image_archives {
 		*	PHPをセーフモードで使っているとこのプラグインが使えないだろう。
 		*/
 		
-		if( $this->image_archives_settings_read() === false ) return;
+		if( $this->image_archives_settings_read() == false ) return;
 		
 		$this->image_archives_cache_file ( $c_dir, $c_file );
 		
-		if( $this->v_cache === 'on' && file_exists($c_file) ) $this->image_archives_cache_create();
+		if( $this->v_cache == 'on' && file_exists($c_file) ) $this->image_archives_cache_create();
 		
 	}
 	
@@ -477,17 +477,17 @@ class image_archives {
 	function image_archives_output () {
 		
 		//send query
-		if( ($this->v_design !== 4) || ($this->v_design !== 5) ) {
+		if( ($this->v_design != 4) || ($this->v_design != 5) ) {
 			$arr = $this->image_archives_query( $count );
 			if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 		}
 		
 		// OUTPUT
-		if( $this->v_design === 1 ) { 
+		if( $this->v_design == 1 ) { 
 			
 			$output = "<table class='img_arc'><tbody>\n";
 			
-			for( $i=0; $arr[$i] !== NULL; $i++ ) {
+			for( $i=0; $arr[$i] != NULL; $i++ ) {
 				$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 				
 				$output .= "  <tr>\n"
@@ -495,28 +495,28 @@ class image_archives {
 						.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n"
 						.  "    </td>\n"
 						.  "    <td>\n";
-				if( $this->v_title_show === 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
-				if( $this->v_date_show === 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
+				if( $this->v_title_show == 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
+				if( $this->v_date_show == 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
 				$output .= "    </td>\n"
 						.  "  </tr>\n";
 			}
 			
 			$output .= "</tbody></table>\n";
 			
-		} elseif( $this->v_design === 2 ) {
+		} elseif( $this->v_design == 2 ) {
 			
-			if( $this->v_column === 1 ) {
+			if( $this->v_column == 1 ) {
 				
 				$output = "<table class='img_arc'><tbody>\n";
 				
-				for( $i=0; $arr[$i] !== NULL; $i++ ) {
+				for( $i=0; $arr[$i] != NULL; $i++ ) {
 					$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 					
 					$output .= "  <tr>\n"
 							.  "    <td>\n"
 							.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
-					if( $this->v_title_show === 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
-					if( $this->v_date_show === 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
+					if( $this->v_title_show == 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
+					if( $this->v_date_show == 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
 					$output .= "    </td>\n"
 							.  "  </tr>\n";
 				}
@@ -527,17 +527,17 @@ class image_archives {
 				
 				$output = "<table class='img_arc'><tbody>\n";
 				
-				for( $i=0; $arr[$i] !== NULL; $i++ ) {
+				for( $i=0; $arr[$i] != NULL; $i++ ) {
 					$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 					
-					if( $i % $this->v_column === 0 ) $output .= "  <tr>\n";
+					if( $i % $this->v_column == 0 ) $output .= "  <tr>\n";
 					$output .= "    <td>\n"
 							.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
-					if( $this->v_title_show === 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
-					if( $this->v_date_show === 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
+					if( $this->v_title_show == 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
+					if( $this->v_date_show == 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
 					$output	.= "    </td>\n";
 					
-					if( $i % $this->v_column === $this->v_column - 1 ) $output .= "  </tr>\n";
+					if( $i % $this->v_column == $this->v_column - 1 ) $output .= "  </tr>\n";
 				}
 				
 				// $i はループ終了後 +1 されている
@@ -547,24 +547,24 @@ class image_archives {
 				$output .= "</tbody></table>\n";
 			}
 			
-		} elseif( $this->v_design === 3 ) {
+		} elseif( $this->v_design == 3 ) {
 			
 			$output = "<div class='img_arc'>\n";
 			
-			for( $i=0; $arr[$i] !== NULL; $i++ ) {
+			for( $i=0; $arr[$i] != NULL; $i++ ) {
 				$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 				
 				$output .= "  <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a>\n";
-				if( $this->v_title_show === 'on' ) $output .= "    <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
-				if( $this->v_date_show === 'on' )  $output .= "    <div class='img_arc_date'>  ( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )\n";
+				if( $this->v_title_show == 'on' ) $output .= "    <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
+				if( $this->v_date_show == 'on' )  $output .= "    <div class='img_arc_date'>  ( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )\n";
 				$output .= "  </div>\n";
 			}
 			
 			$output .= "</div>\n";
 			
-		} elseif( $this->v_design === 4 ) {
+		} elseif( $this->v_design == 4 ) {
 			
-			if( $this->v_section_sort === 'category' )
+			if( $this->v_section_sort == 'category' )
 			{
 				if( $this->v_column > 1) {
 					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.4.min.js'></script>\n"
@@ -599,28 +599,28 @@ class image_archives {
 							// $img_num is a calculated number of images per a page.
 							$output	.= " <div id='accordion-cat-$this->v_term_id-$current_page'>\n";
 							$output	.= "  <table class='img_arc'><tbody>\n";
-							for( $img_num = 0; ( $img_num <= ($this->v_item - 1) ) && ( $arr[$i] !== NULL ) ; $img_num ++ )
+							for( $img_num = 0; ( $img_num <= ($this->v_item - 1) ) && ( $arr[$i] != NULL ) ; $img_num ++ )
 							{
 								$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 								
-								if( $img_num % $this->v_column === 0 ) // if it is a first image of a row,
+								if( $img_num % $this->v_column == 0 ) // if it is a first image of a row,
 								{	$output	.= "   <tr>\n";}
 									
 									$output	.= "    <td class='img_arc'>\n"
 												.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
 								
-								if( $this->v_title_show === 'on' )
+								if( $this->v_title_show == 'on' )
 								{	$output	.= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";}
 								
-								/*if( $this->v_article_show === 'on' )
+								/*if( $this->v_article_show == 'on' )
 								{	$output	.="";}*/
 								
-								if( $this->v_date_show === 'on' )
+								if( $this->v_date_show == 'on' )
 								{	$output	.= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";}
 									
 									$output	.= "    </td>\n";
 									
-								if( $img_num % $this->v_column === ($this->v_column - 1) )
+								if( $img_num % $this->v_column == ($this->v_column - 1) )
 								{	$output	.= "   </tr>\n";}
 								
 								$i++;
@@ -647,7 +647,7 @@ class image_archives {
 					
 				} else return "in 'design = 4', 'column' is required to be larger than 1.";
 				
-			} elseif( $this->v_section_sort === 'number' )
+			} elseif( $this->v_section_sort == 'number' )
 			{
 				if( $this->v_column > 1) {
 					
@@ -677,16 +677,16 @@ class image_archives {
 							//最後のページの時で無い時
 							$output .= "$this->v_section_name $p";
 							
-							if( $this->v_section_result_number_show === 'on' )
+							if( $this->v_section_result_number_show == 'on' )
 							{	$output .= " ( ". $this->v_item * $p ." / $count )";}
 							
 							$output .= "</a></h3>\n";
 							
-						} elseif ( $p === $page ) {
+						} elseif ( $p == $page ) {
 							//最後のページの時
 							$output .= "$this->v_section_name $p";
 							
-							if( $this->v_section_result_number_show === 'on' )
+							if( $this->v_section_result_number_show == 'on' )
 							{	$output .= " ( $count / $count )";}
 							
 							$output .= "</a></h3>\n";
@@ -699,18 +699,18 @@ class image_archives {
 						$output .= "<table class='img_arc'><tbody>\n";
 						
 						// $cr is a number of images per a page.
-						for( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] !== NULL ) ; $cr++) {
+						for( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] != NULL ) ; $cr++) {
 							
 							$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 							
-							if ( $cr % $this->v_column === 0 ) $output .= "  <tr>\n";
+							if ( $cr % $this->v_column == 0 ) $output .= "  <tr>\n";
 							$output .= "    <td>\n"
 									.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
-							if ( $this->v_title_show === 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
-							if ( $this->v_date_show === 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
+							if ( $this->v_title_show == 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
+							if ( $this->v_date_show == 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
 							$output	.= "    </td>\n";
 							
-							if ( $cr % $this->v_column === $this->v_column - 1 ) $output .= "  </tr>\n";
+							if ( $cr % $this->v_column == $this->v_column - 1 ) $output .= "  </tr>\n";
 							
 							$i++;
 						}
@@ -736,9 +736,9 @@ class image_archives {
 				return "in 'design = 4', section_sort is required to be 'category' or 'number'.";
 			}
 			
-		} elseif( $this->v_design === 5 ) {
+		} elseif( $this->v_design == 5 ) {
 			
-			if( $this->v_section_sort === 'category' )
+			if( $this->v_section_sort == 'category' )
 			{
 				if( $this->v_column > 1)
 				{
@@ -776,28 +776,28 @@ class image_archives {
 							// $img_num is a calculated number of images per a page.
 							$output_c	 = "<div id='tabs-cat-$this->v_term_id-$current_page'>\n";
 							$output_c	.= " <table class='img_arc'><tbody>\n";
-							for( $img_num = 0; ( $img_num <= ($this->v_item - 1) ) && ( $arr[$i] !== NULL ) ; $img_num ++ )
+							for( $img_num = 0; ( $img_num <= ($this->v_item - 1) ) && ( $arr[$i] != NULL ) ; $img_num ++ )
 							{
 								$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 								
-								if( $img_num % $this->v_column === 0 ) // if it is a first image of a row,
+								if( $img_num % $this->v_column == 0 ) // if it is a first image of a row,
 								{	$output_c	.= "  <tr>\n";}
 									
 									$output_c	.= "    <td class='img_arc'>\n"
 												.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
 								
-								if( $this->v_title_show === 'on' )
+								if( $this->v_title_show == 'on' )
 								{	$output_c	.= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";}
 								
-								/*if( $this->v_article_show === 'on' )
+								/*if( $this->v_article_show == 'on' )
 								{	$output_c	.="";}*/
 								
-								if( $this->v_date_show === 'on' )
+								if( $this->v_date_show == 'on' )
 								{	$output_c	.= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";}
 									
 									$output_c	.= "    </td>\n";
 									
-								if( $img_num % $this->v_column === ($this->v_column - 1) )
+								if( $img_num % $this->v_column == ($this->v_column - 1) )
 								{	$output_c	.= "  </tr>\n";}
 								
 								$i++;
@@ -850,7 +850,7 @@ class image_archives {
 					return "in 'design = 5', 'column' is required to be larger than 1.";
 				}
 				
-			} elseif( $this->v_section_sort === 'number' )
+			} elseif( $this->v_section_sort == 'number' )
 			{
 				if( $this->v_column > 1)
 				{
@@ -878,16 +878,16 @@ class image_archives {
 							
 							$output .= "  <li><h3><a href='#tabs-$p'>$this->v_section_name $p";
 							
-							if( $this->v_section_result_number_show === 'on' )
+							if( $this->v_section_result_number_show == 'on' )
 							{	$output .= " ( ". $this->v_item * $p ." / $count )";}
 							
 							$output .= "</a></h3></li>\n";
 							
-						} elseif( $p === $page ) {
+						} elseif( $p == $page ) {
 							//最後のページの時
 							
 							$output .= "  <li><h3><a href='#tabs-$p'>$this->v_section_name $p";
-							if( $this->v_section_result_number_show === 'on' )
+							if( $this->v_section_result_number_show == 'on' )
 							{	$output .= " ( $count / $count )";}
 							
 							$output .= "</a></h3></li>\n";
@@ -911,18 +911,18 @@ class image_archives {
 						$output .= "<table class='img_arc'><tbody>\n";
 						
 						// $cr is a calculated number of images per a page.
-						for( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] !== NULL ) ; $cr++ ) {
+						for( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] != NULL ) ; $cr++ ) {
 							
 							$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 							
-							if( $cr % $this->v_column === 0 ) $output .= "  <tr>\n";
+							if( $cr % $this->v_column == 0 ) $output .= "  <tr>\n";
 							$output .= "    <td class='img_arc'>\n"
 									.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
-							if( $this->v_title_show === 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
-							if( $this->v_date_show === 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
+							if( $this->v_title_show == 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
+							if( $this->v_date_show == 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
 							$output	.= "    </td>\n";
 							
-							if( $cr % $this->v_column === $this->v_column - 1 ) $output .= "  </tr>\n";
+							if( $cr % $this->v_column == $this->v_column - 1 ) $output .= "  </tr>\n";
 							
 							$i++;
 						}
