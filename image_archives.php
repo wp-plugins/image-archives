@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://everything.ismusic.in/2010/12/image-archives/
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.62
+ Version: 0.63
  Author: Nomeu
  Author URI: http://everything.ismusic.in/
  */
@@ -410,7 +410,6 @@ class image_archives {
 			
 		} else {
 		
-			$this->image_archives_settings_write();
 			return $this->image_archives_output();
 		
 		}

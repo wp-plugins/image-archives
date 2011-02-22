@@ -112,6 +112,9 @@ As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/
 
 == Changelog ==
 
+= 0.63 =
+* Fixed the cache creation function. Now you can update a cache file correctly when you save a post or a page.
+
 = 0.62 =
 * Fixed the searching query. Now you can search your database with term_id correctly.
 
