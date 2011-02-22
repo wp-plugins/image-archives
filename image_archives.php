@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: http://everything.ismusic.in/2010/12/image-archives/
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.61
+ Version: 0.62
  Author: Nomeu
  Author URI: http://everything.ismusic.in/
  */
@@ -316,16 +316,33 @@ class image_archives {
 			
 			$query	= "SELECT SQL_CALC_FOUND_ROWS DISTINCT p1.ID AS image_post_id, p1.post_parent AS parent_article_id, $wpdb->posts.post_title, $wpdb->posts.post_date"
 					. " FROM $wpdb->posts AS p1"
-					. " RIGHT JOIN $wpdb->term_relationships ON ($wpdb->term_relationships.object_id = p1.post_parent)"
-					. " RIGHT JOIN $wpdb->posts ON ($wpdb->posts.ID = p1.post_parent)"
+					. " INNER JOIN $wpdb->term_relationships ON ( $wpdb->term_relationships.object_id = p1.post_parent )"
+					. " INNER JOIN $wpdb->posts ON ( $wpdb->posts.ID = p1.post_parent )"
+					. " INNER JOIN $wpdb->term_taxonomy ON ( $wpdb->term_taxonomy.term_taxonomy_id = $wpdb->term_relationships.term_taxonomy_id )"
 					. " WHERE p1.post_mime_type LIKE 'image%'"
 					. " AND p1.post_type = 'attachment'"
 					. " AND p1.post_status = 'inherit'"
 					. " AND $wpdb->posts.post_status = 'publish'"
-					. " AND $wpdb->term_relationships.term_taxonomy_id IN (". $wpdb->escape( $this->v_term_id ) .")"
+					. " AND $wpdb->term_taxonomy.term_id IN (". $wpdb->escape( $this->v_term_id ) .")"
 					. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
 					. " ORDER BY ". $wpdb->escape( $this->v_order_by ) ." ". $wpdb->escape( $this->v_order )
 					. " LIMIT ". $wpdb->escape( $this->v_limit );
+			
+			/* Query Test
+				SELECT *
+				FROM wp_posts AS p1
+				INNER JOIN wp_term_relationships ON ( wp_term_relationships.object_id = p1.post_parent )
+				INNER JOIN wp_posts ON ( wp_posts.ID = p1.post_parent )
+				INNER JOIN wp_term_taxonomy ON ( wp_term_taxonomy.term_taxonomy_id = wp_term_relationships.term_taxonomy_id )
+				WHERE p1.post_mime_type LIKE 'image%'
+				AND p1.post_title LIKE 'deadspace2_%'
+				AND p1.post_type = 'attachment'
+				AND p1.post_status = 'inherit'
+				AND wp_posts.post_status = 'publish'
+				AND wp_term_taxonomy.term_id IN ( 155 )
+				AND p1.post_title LIKE '%_logo'
+				LIMIT 0 , 30
+			*/
 			
 			$query_array = $wpdb->get_results($query, ARRAY_A);
 			// query_array[ROW][ image_post_id / parent_article_id / post_title / post_date ]
@@ -334,13 +351,14 @@ class image_archives {
 			
 			$query2	= "SELECT SQL_CALC_FOUND_ROWS * FROM (SELECT p1.ID AS image_post_id, p1.post_title AS image_post_title, p1.post_parent AS parent_article_id, $wpdb->posts.post_title, $wpdb->posts.post_date"
 					. " FROM $wpdb->posts AS p1"
-					. " RIGHT JOIN $wpdb->term_relationships ON ($wpdb->term_relationships.object_id = p1.post_parent)"
-					. " RIGHT JOIN $wpdb->posts ON ($wpdb->posts.ID = p1.post_parent)"
+					. " INNER JOIN $wpdb->term_relationships ON ($wpdb->term_relationships.object_id = p1.post_parent)"
+					. " INNER JOIN $wpdb->posts ON ($wpdb->posts.ID = p1.post_parent)"
+					. " INNER JOIN $wpdb->term_taxonomy ON ( $wpdb->term_taxonomy.term_taxonomy_id = $wpdb->term_relationships.term_taxonomy_id )"
 					. " WHERE p1.post_mime_type LIKE 'image%'"
 					. " AND p1.post_type = 'attachment'"
 					. " AND p1.post_status = 'inherit'"
 					. " AND $wpdb->posts.post_status = 'publish'"
-					. " AND $wpdb->term_relationships.term_taxonomy_id IN (". $wpdb->escape( $this->v_term_id ) .")"
+					. " AND $wpdb->term_taxonomy.term_id IN (". $wpdb->escape( $this->v_term_id ) .")"
 					. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
 					. " ORDER BY ". $wpdb->escape( $this->v_image_order_by ) ." ". $wpdb->escape( $this->v_image_order ) .") AS m1"
 					. " GROUP BY parent_article_id"
@@ -770,7 +788,7 @@ class image_archives {
 						
 						for( $current_page=1 ; $current_page <= $page; $current_page ++ )
 						{
-							$section_title[$this->v_term_id][$current_page] = "    <li><h3><a href='#tabs-cat-$this->v_term_id-$current_page'>" . get_cat_name($cat_id) . " ( $current_page / $page )</a></h3></li>\n";
+							$section_title[$this->v_term_id][$current_page] = "    <li><h3><a href='#tabs-cat-$this->v_term_id-$current_page'>" .get_cat_name($cat_id) . " ( $current_page / $page )</a></h3></li>\n";
 							
 							// create a <div> for jQuery.
 							// $img_num is a calculated number of images per a page.
