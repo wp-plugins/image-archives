@@ -1,14 +1,14 @@
 <?php
 /*
  Plugin Name: Image Archives
- Plugin URI: http://everything.ismusic.in/2010/12/image-archives/
+ Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
  Version: 0.63
  Author: Nomeu
- Author URI: http://everything.ismusic.in/
+ Author URI: http://if-music.be/
  */
  
-/*  Copyright 2010 Nomeu (email : nomeu@ismusic.in)
+/*  Copyright 2010 Nomeu (email : nomeu@if-music.be)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -624,13 +624,10 @@ class image_archives {
 								{	$output	.= "   <tr>\n";}
 									
 									$output	.= "    <td class='img_arc'>\n"
-												.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
+											.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
 								
 								if( $this->v_title_show == 'on' )
 								{	$output	.= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";}
-								
-								/*if( $this->v_article_show == 'on' )
-								{	$output	.="";}*/
 								
 								if( $this->v_date_show == 'on' )
 								{	$output	.= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";}
