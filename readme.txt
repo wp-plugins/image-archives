@@ -14,7 +14,8 @@ First of all, sorry for my bad English.
 
 Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
 
-[Sample](http://everything.ismusic.in/2010/12/image-archives/)
+[Sample](http://if-music.be/game-reviews-list/)
+If you found a problem with this plugin, please tell me. "nomeu[-at-]if-music.be".
 
 = NOTICE =
 * The images that you want to show is needed to be attached to posts they were published in.
