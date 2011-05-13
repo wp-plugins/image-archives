@@ -3,7 +3,7 @@ Contributors: coppola00
 Donate link: 
 Tags: image, archive, post list, list, thumbnail, jQuery, jQuery UI, Accordion
 Requires at least: 2.0
-Tested up to: 3.0.5
+Tested up to: 3.1.2
 Stable tag: trunk
 
 Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.

@@ -5,10 +5,10 @@
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
  Version: 0.63
  Author: Nomeu
- Author URI: http://if-music.be/
+ Author URI: http://nomeu.net/
  */
  
-/*  Copyright 2010 Nomeu (email : nomeu@if-music.be)
+/*  Copyright 2010- Nomeu (email : nomeu@nomeu.net)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
