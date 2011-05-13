@@ -21,22 +21,22 @@ If you found a problem with this plugin, please tell me. "nomeu[-at-]nomeu.net".
 * In order to link to the permalink of a post, the post must be "published".
 
 = HOW TO USE =
-Write shortcode "\[image\_archives\]" in the place you want to show the image archives.
-And you can set some attributes.
+First, write shortcode "\[image\_archives\]" in the place you want to show the image archives.
+Second, set some attributes for this plugin.
 
 \[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *column=?* *date_format=?* *date_show=?* *cache=?*\]
 
-Write only necessary attributes. Default settings are below. Probably you need to configure "str" and "term_id".
+Write only necessary attributes. Default settings are below. Probably you need to configure "str" and "term_id" at least.
 
-You can also use the function of this plugin. In order to use the function, write *wp\_image\_archives\(\);* within php code. And in order to use the attributes, write like below.
+You can also use the function of this plugin. In order to use the function, write "wp\_image\_archives\(\);" within php code. As for the attributes, write like below.
 
 wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 
-Added the first\_image\_mode. Without configure the search strings you can search a image in a post, and show a image per post. If you want to show the images of your posts easily, use this feature.
+I added a attribute "first\_image\_mode". Without configure the search strings, you can search a image in a post, and show a image per post. If you want to show the images of your posts easily, use this attribute.
 
 \[image\_archives first\_image\_mode=on\]
 
-The 'first' image means your 'first' uploaded image in the post. If you want to show the first image that is sorted by filename, use *image\_order\_by=title*. You can also use *image\_order=DESC*. If you use DESC, the latest image in the post is showed.
+The 'first' image means your 'first' uploaded image in the post. If you want to show the first image that is sorted by filename, use "image\_order\_by=title". You can also use "image\_order=DESC". If you use DESC, the latest image in the post is showed.
 
 = Default values =
 * first_image_mode = off
