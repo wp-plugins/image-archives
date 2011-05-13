@@ -61,11 +61,11 @@ The 'first' image means your 'first' uploaded image in the post. If you want to 
 
 = explanation =
 * **first\_image\_mode** is the feature you can show a image per post without configuring the search strings. Default setting of this feature is off. If you configure first\_image\_mode=on, you can use below two settings.
-* **image\_order\_by** is the method of ordering the searched images.  You can use "title" or "date". This attribute is enabled only when first\_image\_mode is on.
-* **image\_order** requires the sort type. You can use "ASC" or "DESC". Uppercase only. This attribute is enabled only when first\_image\_mode is on.
+* **image\_order\_by** is the method of ordering the searched images within a post.  You can use "title" or "date". This attribute is enabled only when first\_image\_mode is on.
+* **image\_order** requires the sort type within a post. You can use "ASC" or "DESC". Uppercase only. This attribute is enabled only when first\_image\_mode is on.
 * **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
-* **order\_by** is the method of ordering a list of the images(posts).  You can use "title" or "date".
-* **order** requires the sort type. You can use "ASC" or "DESC". Uppercase only.
+* **order\_by** is the method of ordering a list of the images(posts) in output.  You can use "title" or "date".
+* **order** requires the sort type in output. You can use "ASC" or "DESC". Uppercase only.
 * **str** is a search string. The search string must be a part of the file name of images you uploaded. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
 * **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
