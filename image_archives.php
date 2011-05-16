@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.63
+ Version: 0.64
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
