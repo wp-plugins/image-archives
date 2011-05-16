@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.63
+ Version: 0.64
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
@@ -584,10 +584,10 @@ class image_archives {
 			if( $this->v_section_sort == 'category' )
 			{
 				if( $this->v_column > 1) {
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.4.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.7.custom.min.js'></script>\n"
+					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.1.min.js'></script>\n"
+							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.12.custom.min.js'></script>\n"
 							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.7.custom.css' rel='stylesheet' />\n"
+							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.12.custom.css' rel='stylesheet' />\n"
 							. "<div id='accordion'>\n";
 					
 					//$arr = $this->image_archives_query( $count );
@@ -668,10 +668,10 @@ class image_archives {
 					$arr = $this->image_archives_query( $count );
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.4.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.7.custom.min.js'></script>\n"
+					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.1.min.js'></script>\n"
+							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.12.custom.min.js'></script>\n"
 							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.7.custom.css' rel='stylesheet' />\n"
+							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.12.custom.css' rel='stylesheet' />\n"
 							. "<div id='accordion'>\n";
 					
 					// calculate a number of pages.
@@ -756,10 +756,10 @@ class image_archives {
 			{
 				if( $this->v_column > 1)
 				{
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.4.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.7.custom.min.js'></script>\n"
+					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.1.min.js'></script>\n"
+							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.12.custom.min.js'></script>\n"
 							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.7.custom.css' rel='stylesheet' />\n"
+							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.12.custom.css' rel='stylesheet' />\n"
 							. "<div id='tabs'>\n";
 					
 					//$arr = $this->image_archives_query( $count );
@@ -872,10 +872,10 @@ class image_archives {
 					$arr = $this->image_archives_query( $count );
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.4.4.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.7.custom.min.js'></script>\n"
+					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.1.min.js'></script>\n"
+							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.12.custom.min.js'></script>\n"
 							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.7.custom.css' rel='stylesheet' />\n"
+							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.12.custom.css' rel='stylesheet' />\n"
 							. "<div id='tabs'>\n";
 					
 					// calculate a number of pages.
