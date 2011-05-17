@@ -99,7 +99,7 @@ div.img\_arc_text a { <br />
 
 As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/accordion/), [Tabs](http://jqueryui.com/demos/tabs/).
 
-As for the color theme of Accordion(design=4) and Tabs(design=5), this theme is changable. If you want to change this theme, visit jQuery UI(http://jqueryui.com/themeroller) and download a theme file. Then, extract it, and overwrite the files of this plugin(/css/) with the downloaded files(/css/THEME_NAME/). To overwrite the files, you need to use FTP or else. The files is located under your wordpress folder(/wp-content/plugins/image-archives/css/).
+As for the color theme of Accordion(design=4) and Tabs(design=5), this theme is changeable. If you want to change this theme, visit jQuery UI(http://jqueryui.com/themeroller) and download a theme file. Then, extract it, and overwrite the files of this plugin(/css/) with the downloaded files(/css/THEME_NAME/). To overwrite the files, you need to use FTP or else. The files is located under your wordpress folder(/wp-content/plugins/image-archives/css/).
 
 
 == Installation ==
