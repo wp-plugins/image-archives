@@ -115,6 +115,9 @@ As for the color theme of Accordion(design=4) and Tabs(design=5), this theme is 
 
 == Changelog ==
 
+= 0.65 =
+* Fixed "image_order_by" attribute to order by "title" correctly.
+
 = 0.64 =
 * Updated jQuery files. Now jQuery 1.6.1 and jQuery UI 1.8.12.
 

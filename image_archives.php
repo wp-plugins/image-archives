@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.64
+ Version: 0.65
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
@@ -82,7 +82,7 @@ class image_archives {
 			if( ($first_image_mode == 'on') || ($first_image_mode == 'off') ) $this->v_first_image_mode = $first_image_mode;
 			else return "shortcode atts error. first_image_mode is required to be 'on' or 'off'.";
 		//image_order_by
-			if( $image_order_by == 'title' ) $this->v_image_order_by = 'p1.post_date';
+			if( $image_order_by == 'title' ) $this->v_image_order_by = 'p1.post_title';
 			elseif( $image_order_by == 'date' ) $this->v_image_order_by = 'p1.post_date';
 			else return "shortcode atts error. image_order_by is required to be 'title' or 'date'.";
 		//image_order
@@ -176,7 +176,7 @@ class image_archives {
 			if( ($first_image_mode == 'on') || ($first_image_mode == 'off') ) $this->v_first_image_mode = $first_image_mode;
 			else { echo "shortcode atts error. first_image_mode is required to be 'on' or 'off'."; return; }
 		//image_order_by
-			if( $image_order_by == 'title' ) $this->v_image_order_by = 'p1.post_date';
+			if( $image_order_by == 'title' ) $this->v_image_order_by = 'p1.post_title';
 			elseif( $image_order_by == 'date' ) $this->v_image_order_by = 'p1.post_date';
 			else { echo "shortcode atts error. image_order_by is required to be 'title' or 'date'."; return; }
 		//image_order
