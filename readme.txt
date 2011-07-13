@@ -1,7 +1,7 @@
 === Image Archives ===
 Contributors: coppola00
 Donate link: 
-Tags: image, archive, post list, list, thumbnail, jQuery, jQuery UI, Accordion
+Tags: image, archive, post list, list, thumbnail, jQuery, jQuery UI, Accordion, Tabs
 Requires at least: 2.0
 Tested up to: 3.2.1
 Stable tag: trunk
