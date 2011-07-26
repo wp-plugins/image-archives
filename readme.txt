@@ -10,10 +10,11 @@ Image Archives is a wordpress plugin that displays images from your published po
 
 
 == Description ==
-First of all, sorry for my bad English.
+(First of all, sorry for my bad English.)
 
 Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
 
+[Sample Page](http://nomeu.net/image-archives/).
 If you found a problem with this plugin, please tell me. "nomeu[-at-]nomeu.net".
 
 = NOTICE =
@@ -115,12 +116,14 @@ As for the color theme of Accordion(design=4) and Tabs(design=5), this theme is 
 
 == Changelog ==
 
+= 0.67 =
+* Fixed the height of output contents are wrong in design=4(jQuery Accordion). This is a jQuery known bug for the Accordion.
+
 = 0.66 =
 * Changed the cache system. Previously this plugin renewed a cache file when you publish/edit a post, but now this plugin deletes all of the cache files when you publish/edit a post, and creates the cache files when this plugin is first loaded after deleting them. By this change, you can use "cache=on" as many times as you want.
 * Default value of "cahce" attribute is changed to "on".
 * Updated jQuery to 1.6.2.
 * Updated jQueryUI to 1.8.14.
-
 
 = 0.65 =
 * Fixed "image_order_by" attribute to the images being ordered by "title" correctly.
