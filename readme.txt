@@ -70,7 +70,7 @@ Please note that the 'first' image means your 'first' uploaded image in your pos
 * **str** is a search string. The search string must be a part of the file name of images you uploaded. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
 * **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like '20,50'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full".
-* **design** is the type of output design. "1" to "5" at present. design=4,5 use jQuery. design=4 uses [Accordion](http://jqueryui.com/demos/accordion/). design=5 uses [Tabs](http://jqueryui.com/demos/tabs/).
+* **design** is the type of output design. "1" to "5" at present. design=4,5 use jQuery and jQuery UI. design=4 uses [Accordion](http://jqueryui.com/demos/accordion/). design=5 uses [Tabs](http://jqueryui.com/demos/tabs/).
 * **item** is the number of images per a page(section). This attribute is enabled only when "design=4,5".
 * **column** is the number of columns. This attribute is enabled only when "design=2,4,5".
 * **date\_format** is the date format. Please refer to [PHP.net date format](http://php.net/manual/en/function.date.php).
@@ -98,7 +98,7 @@ div.img\_arc_text a { <br />
 &nbsp;&nbsp;text-decoration: none; <br />
 }
 
-As for jQuery design CSS, please refer to [Accordion](http://jqueryui.com/demos/accordion/), [Tabs](http://jqueryui.com/demos/tabs/).
+As for jQuery UI design CSS, please refer to [Accordion](http://jqueryui.com/demos/accordion/), [Tabs](http://jqueryui.com/demos/tabs/).
 
 As for the color theme of Accordion(design=4) and Tabs(design=5), this theme is changeable. If you want to change this theme, visit jQuery UI(http://jqueryui.com/themeroller) and download a theme file. Then, extract it, and overwrite the files of this plugin(/css/) with the downloaded files(/css/THEME_NAME/). To overwrite the files, you need to use FTP or else. The files is located under your wordpress folder(/wp-content/plugins/image-archives/css/).
 
@@ -117,7 +117,7 @@ As for the color theme of Accordion(design=4) and Tabs(design=5), this theme is 
 == Changelog ==
 
 = 0.67 =
-* Fixed the height of output contents are wrong in design=4(jQuery Accordion). This is a jQuery known bug for the Accordion.
+* Fixed the height of output contents are wrong in design=4(jQuery UI Accordion). This is a jQuery UI known bug for the Accordion.
 
 = 0.66 =
 * Changed the cache system. Previously this plugin renewed a cache file when you publish/edit a post, but now this plugin deletes all of the cache files when you publish/edit a post, and creates the cache files when this plugin is first loaded after deleting them. By this change, you can use "cache=on" as many times as you want.
