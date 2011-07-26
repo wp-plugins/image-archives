@@ -741,7 +741,7 @@ class image_archives {
 							$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
 							
 							if ( $cr % $this->v_column == 0 ) $output .= "  <tr>\n";
-							$output .= "    <td>\n"
+							$output .= "    <td class='img_arc'>\n"
 									.  "      <div class='img_arc_img'><a href='". get_permalink($arr[$i][parent_article_id]) ."'><img src='$img_src[0]' alt='". attribute_escape($arr[$i][post_title]) ."' title='". attribute_escape($arr[$i][post_title]) ."' /></a></div>\n";
 							if ( $this->v_title_show == 'on' ) $output .= "      <div class='img_arc_text'><a href='". get_permalink($arr[$i][parent_article_id]) ."'>". $arr[$i][post_title] ."</a></div>\n";
 							if ( $this->v_date_show == 'on' )  $output .= "      <div class='img_arc_date'>( ". date( "$this->v_date_format", strtotime($arr[$i][post_date]) ) ." )</div>\n";
