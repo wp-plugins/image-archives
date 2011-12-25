@@ -114,8 +114,10 @@ In other words, I recommend you add "-thumb" or something to the suffix of your 
 * **I want to show a monthly archives.** <br />
 It is basically impossible. But technically, it is possible. As I explained above, name the filenames nicely. <br />
 If you name images like "**2012-01-abc.jpg**", "**2012-01-vvv.jpg**", "**2012-02-112.jpg**", you can search for posts in 2012/01 with "**str=2012-01-%**". <br />
-I received many questions or requests about this, so I'll make this function in the future, in another plugin.
-It is because while "monthly" is based on posts' date, this plugin is based on images you uploaded.
+I received many questions or requests about this, so if someone doesn't make this function, I'll make it in the future, in another plugin. This is because while "monthly" is based on posts' date, this plugin is based on images you uploaded.
+
+* **I want to set "ALL" to "term_id". (I want to search all categories/tags.) ** <br />
+Use "term_id=!0".
 
 * **I want a paging system on this plugin.** <br />
 Sorry, paging system is not supported by this plugin so far. But alternatively, you can use your wordpress function. <br />
