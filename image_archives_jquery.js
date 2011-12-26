@@ -1,8 +1,8 @@
-$(document).ready(function(){
+jQuery(document).ready(function($){
 	// Accordion
-	$("#accordion").accordion({ header: "h3", autoHeight: false });
+	$("div.image_archives.accordion").accordion({ header: "h3", autoHeight: false });
 	
 	// Tabs
-	$('#tabs').tabs();
+	$("div.image_archives.tabs").tabs();
 	
 });

@@ -15,7 +15,15 @@ Image Archives is a wordpress plugin that displays images from your published po
 Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.<br />
 This plugin create a image list that is based on images you uploaded, not based on posts.
 
-[Sample Page](http://nomeu.net/image-archives/).
+See how this plugin works on [Sample Page(My site)](http://nomeu.net/image-archives/).
+
+And see also [Arseny's site](http://designcollector.net/visual-archive/). <br />
+This site uses Image Archives, and its shortcode is like
+<blockquote>[image_archives first_image_mode="on" order_by="date" order="DESC"
+term_id="118" limit="0,50" size="thumbnail" design="2" column="5"
+date_show="on" title_show="on" cache="off"]</blockquote>
+(Thank you, Arseny!)
+
 If you found any problems with this plugin, please tell me. "nomeu[-at-]nomeu.net".
 
 = NOTICE =
@@ -28,17 +36,17 @@ It is simple. Write a shortcode **\[image\_archives\]** on the place where you w
 But at first, I recommend you to write a shortcode "**\[image\_archives first_image_mode=on\]**" on a unpublished post.<br />
 This "first_image_mode" is a easy way(mode) to show a list. Without configuring a search strings, you can show a list which contains A image per A post.<br />
 (If you want to change the number of images per a post, set this attribute "off".)<br />
-(And please note that the 'first' image means your 'first' uploaded image in a post. If you want to show the first image that is sorted by filename, use "image\_order\_by=title". You can also use "image\_order=DESC" at the same time. This means a latest image in a post is showed.)
+(And please note that the 'first' image means your 'first' uploaded image in a post. If you want to show a first image that is sorted by filename, use "image\_order\_by=title". You can also use "image\_order=DESC" at the same time. This means a latest image in a post is showed.)
 
 Then you can see the output and how attributes works. After this, set some attributes for this plugin as you want.
 
 Attributes are written like the following.<br />
-\[image\_archives *term\_id=?* *ordered\_by=?* *order=?* *str=?* *limit=?* *size=?* *design=?* *item=?* *column=?* *date_format=?* *date_show=?* *cache=?*\]
+<blockquote>[image_archives term_id=? ordered_by=? order=? str=? limit=? size=? design=? item=? column=? date_format=? date_show=? cache=?]</blockquote>
 
 Write only your necessary attributes. Default settings are below. Probably you should change "str" and "term_id" at least.
 
 You can also use the php function of this plugin. In order to use the function, write "wp\_image\_archives\(\);" within php code. As for the attributes, write like below.<br />
-wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
+<blockquote>wp_image_archives ('term_id=9&order=DESC&design=1');</blockquote>
 
 
 = Default values =
@@ -66,11 +74,11 @@ wp\_image\_archives \('term\_id=9&order=DESC&design=1'\);
 * **first\_image\_mode** is the feature you can show a image per a post without configuring the search strings. Default of this attribute is "off". If you set first\_image\_mode=on, you can use the following two settings.
 * **image\_order\_by** is the method of ordering the searched images within a post.  You can use "title" or "date". This attribute is enabled only when first\_image\_mode is on.
 * **image\_order** requires the sort type within a post. You can use "ASC" or "DESC". Uppercase only. This attribute is enabled only when first\_image\_mode is on.
-* **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only.
+* **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only. Or you can search all of your categories with 'term\_id=ALL' (Uppercase only).
 * **order\_by** is the method of ordering a list of the images(posts) in the output.  You can use "title" or "date".
 * **order** requires the sort type in the output. You can use "ASC" or "DESC". Uppercase only.
 * **str** is a search string. The search string must be a part of the file name of images you uploaded. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
-* **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*end number*' . example, 'limit=0,30' . You can also use this like 'limit=20,50'.
+* **lmit** is a limit of the images that is shown. Write this attribute like '*start number*,*the number of posts*' . example, 'limit=0,30' . You can also use this like 'limit=20,30'.
 * **size** is the size of the images. "thumbnail" or "medium" or "large" or "full". These actual sizes are based on your Wordpress settings.
 * **design** is the type of the output design. "1" to "5" at present. "design=4" and "5" uses jQuery and jQuery UI. "design=4" uses [Accordion](http://jqueryui.com/demos/accordion/). "design=5" uses [Tabs](http://jqueryui.com/demos/tabs/).
 * **item** is the number of images per a section on "design=4,5". This attribute is enabled only when "design=4,5".
@@ -106,7 +114,7 @@ As for the color themes of Accordion(design=4) and Tabs(design=5), these themes 
 
 = Frequently Asked Questions =
 
-* **I want to show a choosed image!** <br />
+* **I want to show a chosen image in a post!** <br />
 In order to show specific images, I recommend you to name image files nicely. <br />
 For example, if you name images like "**aaa-1.jpg**", "**bbb-2.jpg**", "**ccc-3-IWantToShowThis.jpg**", you can search your database for "**ccc-3-IWantToShowThis.jpg**" with "**str=%IWantToShowThis**". <br />
 In other words, I recommend you add "-thumb" or something to the suffix of your specific image filename. Then search it.
@@ -116,10 +124,19 @@ It is basically impossible. But technically, it is possible. As I explained abov
 If you name images like "**2012-01-abc.jpg**", "**2012-01-vvv.jpg**", "**2012-02-112.jpg**", you can search for posts in 2012/01 with "**str=2012-01-%**". <br />
 I received many questions or requests about this, so if someone doesn't make this function, I'll make it in the future, in another plugin. This is because while "monthly" is based on posts' date, this plugin is based on images you uploaded.
 
+* **I want to search all categories.** <br />
+Use "term_id=ALL".
+
 * **I want a paging system on this plugin.** <br />
-Sorry, paging system is not supported by this plugin so far. But alternatively, you can use your wordpress function. <br />
+Sorry, a paging system is not supported by this plugin so far. But alternatively, you can use your wordpress function. <br />
 When you write a article, you can use "<\!--nextpage-->" as Wordpress quicktag. This is similar to "more" tag. <br />
-This is a Wordpress function. Refer to this (http://codex.wordpress.org/Styling_Page-Links).
+This is a Wordpress function. Refer to this (http://codex.wordpress.org/Styling_Page-Links).<br />
+Exmple, <br /><br />
+[image_archives first_image_mode=on ******* limit=0,30]<br />
+<\!--nextpage--><br />
+[image_archives first_image_mode=on ******* limit=30,30]<br />
+.....
+
 
 
 == Installation ==
@@ -134,6 +151,13 @@ This is a Wordpress function. Refer to this (http://codex.wordpress.org/Styling_
 
 
 == Changelog ==
+
+= 0.68 =
+* Added "term_id=ALL". With this setting, you can search all of your categories for images.
+* Now jQuery Library in Wordpress includes is loaded.
+* And jQueryUI Library is loaded from Google-CDN.
+* So this plugin doesn't contain jQuery Libraries now. But a jQuery UI theme is contained.
+* Although when you showed lists more than one in a post, this plugin loaded duplicate jQuery Libraries, this was fixed.
 
 = 0.67 =
 * Fixed the height of output contents are wrong in design=4(jQuery UI Accordion). This is a jQuery UI known bug for the Accordion.

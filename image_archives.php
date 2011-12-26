@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.67
+ Version: 0.68
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
@@ -51,7 +51,7 @@ class image_archives {
 	
 	// shortcode function
 	// shortcode は return を用いても良いが、template tag では使えない。
-	function image_archives_shortcode ( $atts, $content = null ) {
+	function ia_shortcode ( $atts, $content = null ) {
 		
 		extract( shortcode_atts( array(
 			'first_image_mode'	=>	'off',
@@ -133,7 +133,7 @@ class image_archives {
 			if( ($section_result_number_show == 'on') || ($section_result_number_show == 'off') ) $this->v_section_result_number_show = $section_result_number_show;
 			else return "section_result_number_show is required to be 'on' or 'off'";
 		
-		return $this->image_archives_core();
+		return $this->ia_core();
 		
 	}
 	
@@ -141,7 +141,7 @@ class image_archives {
 	
 	//template tag function
 	// cannot use "return".
-	function image_archives_template_tag ( $args = '' ) {
+	function ia_template_tag ( $args = '' ) {
 		
 		$default = array(
 			'first_image_mode'	=>	'off',
@@ -227,13 +227,13 @@ class image_archives {
 			if( ($section_result_number_show == 'on') || ($section_result_number_show == 'off') ) $this->v_section_result_number_show = $section_result_number_show;
 			else { echo "section_result_number_show is required to be 'on' or 'off'"; return; }
 		//important
-		echo $this->image_archives_core();
+		echo $this->ia_core();
 		
 	}
 	
 	
 	
-	function image_archives_settings_write () {
+	function ia_settings_write () {
 		
 		$file = WP_PLUGIN_DIR . '/image-archives/settings.ini';
 		
@@ -270,7 +270,7 @@ class image_archives {
 	
 	
 	
-	function image_archives_settings_read () {
+	function ia_settings_read () {
 		
 		$file = WP_PLUGIN_DIR . '/image-archives/settings.ini';
 		
@@ -308,7 +308,7 @@ class image_archives {
 	
 	
 	
-	function image_archives_query( &$row_count = 0 ) {
+	function ia_query( &$row_count = 0 ) {
 		
 		global $wpdb;
 		
@@ -322,27 +322,15 @@ class image_archives {
 					. " WHERE p1.post_mime_type LIKE 'image%'"
 					. " AND p1.post_type = 'attachment'"
 					. " AND p1.post_status = 'inherit'"
-					. " AND $wpdb->posts.post_status = 'publish'"
-					. " AND $wpdb->term_taxonomy.term_id IN (". $wpdb->escape( $this->v_term_id ) .")"
-					. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
+					. " AND $wpdb->posts.post_status = 'publish'";
+			if( $this->v_term_id == "ALL" )
+				$query .= " AND $wpdb->term_taxonomy.term_id IS NOT NULL";
+			else
+				$query .= " AND $wpdb->term_taxonomy.term_id IN (". $wpdb->escape( $this->v_term_id ) .")";
+			
+			$query	.= " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
 					. " ORDER BY ". $wpdb->escape( $this->v_order_by ) ." ". $wpdb->escape( $this->v_order )
 					. " LIMIT ". $wpdb->escape( $this->v_limit );
-			
-			/* Query Test
-				SELECT *
-				FROM wp_posts AS p1
-				INNER JOIN wp_term_relationships ON ( wp_term_relationships.object_id = p1.post_parent )
-				INNER JOIN wp_posts ON ( wp_posts.ID = p1.post_parent )
-				INNER JOIN wp_term_taxonomy ON ( wp_term_taxonomy.term_taxonomy_id = wp_term_relationships.term_taxonomy_id )
-				WHERE p1.post_mime_type LIKE 'image%'
-				AND p1.post_title LIKE 'deadspace2_%'
-				AND p1.post_type = 'attachment'
-				AND p1.post_status = 'inherit'
-				AND wp_posts.post_status = 'publish'
-				AND wp_term_taxonomy.term_id IN ( 155 )
-				AND p1.post_title LIKE '%_logo'
-				LIMIT 0 , 30
-			*/
 			
 			$query_array = $wpdb->get_results($query, ARRAY_A);
 			// query_array[ROW][ image_post_id / parent_article_id / post_title / post_date ]
@@ -357,9 +345,13 @@ class image_archives {
 					. " WHERE p1.post_mime_type LIKE 'image%'"
 					. " AND p1.post_type = 'attachment'"
 					. " AND p1.post_status = 'inherit'"
-					. " AND $wpdb->posts.post_status = 'publish'"
-					. " AND $wpdb->term_taxonomy.term_id IN (". $wpdb->escape( $this->v_term_id ) .")"
-					. " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
+					. " AND $wpdb->posts.post_status = 'publish'";
+			if( $this->v_term_id == "ALL" )
+				$query2 .= " AND $wpdb->term_taxonomy.term_id IS NOT NULL";
+			else
+				$query2 .= " AND $wpdb->term_taxonomy.term_id IN (". $wpdb->escape( $this->v_term_id ) .")";
+			
+			$query2 .= " AND p1.post_title LIKE '". $wpdb->escape( $this->v_str ) ."'"
 					. " ORDER BY ". $wpdb->escape( $this->v_image_order_by ) ." ". $wpdb->escape( $this->v_image_order ) .") AS m1"
 					. " GROUP BY parent_article_id"
 					. " ORDER BY ". $wpdb->escape( $this->v_order_by ) ." ". $wpdb->escape( $this->v_order )
@@ -368,6 +360,7 @@ class image_archives {
 			$query2_array = $wpdb->get_results($query2, ARRAY_A);
 			// query2_array[ROW][ image_post_id / parent_article_id / post_title / post_date ]
 			
+			//echo $query2;
 			//var_dump($query2_array);
 		}
 		
@@ -388,12 +381,12 @@ class image_archives {
 	
 	
 	
-	function image_archives_core () {
+	function ia_core () {
 		
 		if( $this->v_cache == 'on' ) {
 			
-			//$this->image_archives_settings_write();
-			$this->image_archives_cache_file ( $c_dir, $c_file );
+			//$this->ia_settings_write();
+			$this->ia_cache_file ( $c_dir, $c_file );
 			
 			if( file_exists($c_file) ) {
 				
@@ -402,7 +395,7 @@ class image_archives {
 				
 			} else {
 				
-				$this->image_archives_cache_create();
+				$this->ia_cache_create();
 				$content = file_get_contents($c_file);
 				return $content;
 				
@@ -410,7 +403,7 @@ class image_archives {
 			
 		} else {
 		
-			return $this->image_archives_output();
+			return $this->ia_output();
 		
 		}
 		
@@ -418,7 +411,7 @@ class image_archives {
 	
 	
 	
-	function image_archives_cache_file ( &$cache_dir, &$cache_file ) {
+	function ia_cache_file ( &$cache_dir, &$cache_file ) {
 		
 		$cache_dir = WP_PLUGIN_DIR . '/image-archives/cache';
 		
@@ -450,9 +443,9 @@ class image_archives {
 	
 	
 	
-	function image_archives_cache_create () {
+	function ia_cache_create () {
 		
-		$this->image_archives_cache_file ( $c_dir, $c_file );
+		$this->ia_cache_file ( $c_dir, $c_file );
 		
 		// create a cache dir
 		if( !is_dir( $c_dir ) ) {
@@ -461,7 +454,7 @@ class image_archives {
 		
 		if( $fp = fopen( $c_file, 'w' ) ) {
 			flock( $fp, LOCK_EX );
-				fwrite( $fp, $this->image_archives_output() );
+				fwrite( $fp, $this->ia_output() );
 			flock( $fp, LOCK_UN );
 			fclose( $fp );
 		} else {
@@ -473,30 +466,29 @@ class image_archives {
 	
 	
 	// not in use
-	function image_archives_cache_update () {
+	function ia_cache_update () {
 		
-		/*	After reading "settings.ini", WordPress run this "cache update" function.
+		/*	After reading "settings.ini", WordPress runs this "cache update" function.
 		*	
-		*	image_archives_cache_update() が add_action によって直接呼び出される時、
+		*	ia_cache_update() が add_action によって直接呼び出される時、
 		*	$this->v_* に何も値が入っていない。Wordpress のデータベースに値を保存する手段もあるが
 		*	それをしてしまうと Image Archives を同じページで二度呼べなくなる。この解決方法として
 		*	settings.ini を作り、それを読み出す様にした。
 		*	PHPをセーフモードで使っているとこのプラグインが使えないだろう。
 		*/
 		
-		if( $this->image_archives_settings_read() == false ) return;
+		if( $this->ia_settings_read() == false ) return;
 		
-		$this->image_archives_cache_file ( $c_dir, $c_file );
+		$this->ia_cache_file ( $c_dir, $c_file );
 		
-		if( $this->v_cache == 'on' && file_exists($c_file) ) $this->image_archives_cache_create();
+		if( $this->v_cache == 'on' && file_exists($c_file) ) $this->ia_cache_create();
 		
 	}
 	
 	
-	function image_archives_cache_delete () {
+	function ia_cache_delete () {
 		
 		$cache_dir = WP_PLUGIN_DIR . '/image-archives/cache';
-		
 		
 		if ( $handle = @opendir($cache_dir) ) {
 			while( false !== ($file_name = readdir($handle)) ) {
@@ -514,11 +506,11 @@ class image_archives {
 	
 	
 	
-	function image_archives_output () {
+	function ia_output () {
 		
 		//send query
 		if( ($this->v_design != 4) || ($this->v_design != 5) ) {
-			$arr = $this->image_archives_query( $count );
+			$arr = $this->ia_query( $count );
 			if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 		}
 		
@@ -607,13 +599,10 @@ class image_archives {
 			if( $this->v_section_sort == 'category' )
 			{
 				if( $this->v_column > 1) {
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.2.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.14.custom.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.14.custom.css' rel='stylesheet' />\n"
-							. "<div id='accordion'>\n";
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+							. "<div class='image_archives accordion'>\n";
 					
-					//$arr = $this->image_archives_query( $count );
+					//$arr = $this->ia_query( $count );
 					//if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
 					// categories を comma 切りから格納
@@ -622,7 +611,7 @@ class image_archives {
 					foreach( $cat_arr as $cat_id ){
 						
 						$this->v_term_id = $cat_id;
-						$arr = $this->image_archives_query( $count );
+						$arr = $this->ia_query( $count );
 						
 						// calculate a number of pages in this category.
 						$page = $count / $this->v_item;
@@ -679,7 +668,7 @@ class image_archives {
 					}
 					// いろいろ作成終了
 					
-					// <div id='accordion'> を閉じる
+					// <div class='image_archives accordion'> を閉じる
 					$output .= "</div>\n";
 					
 				} else return "in 'design = 4', 'column' is required to be larger than 1.";
@@ -688,14 +677,11 @@ class image_archives {
 			{
 				if( $this->v_column > 1) {
 					
-					$arr = $this->image_archives_query( $count );
+					$arr = $this->ia_query( $count );
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.2.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.14.custom.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.14.custom.css' rel='stylesheet' />\n"
-							. "<div id='accordion'>\n";
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+							. "<div class='image_archives accordion'>\n";
 					
 					// calculate a number of pages.
 					$page = $count / $this->v_item;
@@ -765,7 +751,7 @@ class image_archives {
 						
 					} // ページの作成終了
 					
-					// <div id='accordion'> を下で閉じる
+					// <div class='image_archives accordion'> を閉じる
 					$output .= "</div>\n";
 					
 				} else return "in 'design = 4', 'column' is required to be larger than 1.";
@@ -779,13 +765,12 @@ class image_archives {
 			{
 				if( $this->v_column > 1)
 				{
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.2.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.14.custom.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.14.custom.css' rel='stylesheet' />\n"
-							. "<div id='tabs'>\n";
 					
-					//$arr = $this->image_archives_query( $count );
+					
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+							. "<div class='image_archives tabs'>\n";
+					
+					//$arr = $this->ia_query( $count );
 					//if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
 					// categories を comma 切りから格納
@@ -794,7 +779,7 @@ class image_archives {
 					foreach( $cat_arr as $cat_id ){
 						
 						$this->v_term_id = $cat_id;
-						$arr = $this->image_archives_query( $count );
+						$arr = $this->ia_query( $count );
 						
 						// calculate a number of pages in this category.
 						$page = $count / $this->v_item;
@@ -880,7 +865,7 @@ class image_archives {
 					
 					// いろいろ作成終了
 					
-					// <div id='tabs'> を閉じる
+					// <div class='image_archives tabs'> を閉じる
 					$output .= "</div>\n";
 					
 				} else {
@@ -892,14 +877,11 @@ class image_archives {
 				if( $this->v_column > 1)
 				{
 					//send query.
-					$arr = $this->image_archives_query( $count );
+					$arr = $this->ia_query( $count );
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
-					$output = "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-1.6.2.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/jquery-ui-1.8.14.custom.min.js'></script>\n"
-							. "<script type='text/javascript' src='". get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js'></script>\n"
-							. "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.14.custom.css' rel='stylesheet' />\n"
-							. "<div id='tabs'>\n";
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+							. "<div class='image_archives tabs'>\n";
 					
 					// calculate a number of pages.
 					$page = $count / $this->v_item;
@@ -977,7 +959,7 @@ class image_archives {
 						
 					} // tabsの作成終了
 					
-					// <div id='tabs'> を下で閉じる
+					// <div class='image_archives tabs'> を下で閉じる
 					$output .= "</div>\n";
 					
 				} else {
@@ -995,9 +977,23 @@ class image_archives {
 		return $output;
 		
 	}
+	
+	
+	function ia_library() {
+			wp_enqueue_script('jquery');
+			wp_deregister_script('jquery-ui');
+			wp_register_script('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js', array('jquery'));
+			wp_enqueue_script('jquery-ui');
+			
+			wp_deregister_script('ia-jquery');
+			wp_register_script('ia-jquery', get_bloginfo('home') ."/wp-content/plugins/image-archives/image_archives_jquery.js", array('jquery'));
+			wp_enqueue_script('ia-jquery');
+	}
+	
+	
+
 
 }
-
 
 $image_archives = new image_archives();
 
@@ -1008,16 +1004,15 @@ $image_archives = new image_archives();
 
 function wp_image_archives ( $args = '' ) {
 	global $image_archives;
-	echo $image_archives->image_archives_template_tag ( $args );
+	echo $image_archives->ia_template_tag ( $args );
 }
-
 
 
 /******************************************************************************
  * shortcode - [image_archives]
  *****************************************************************************/
 
-add_shortcode( 'image_archives', array( $image_archives, 'image_archives_shortcode' ) );
+add_shortcode( 'image_archives', array( $image_archives, 'ia_shortcode' ) );
 
 
 
@@ -1025,6 +1020,8 @@ add_shortcode( 'image_archives', array( $image_archives, 'image_archives_shortco
  * add_action hook
  *****************************************************************************/
 
-add_action( 'wp_insert_post', array( $image_archives, 'image_archives_cache_delete' ) );
+add_action( 'wp_insert_post', array( $image_archives, 'ia_cache_delete' ) );
+add_action( 'wp_enqueue_scripts', array( $image_archives, 'ia_library' ) );
+
 
 ?>
