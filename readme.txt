@@ -17,7 +17,7 @@ This plugin create a image list that is based on images you uploaded, not based 
 
 See how this plugin works on [Sample Page(My site)](http://nomeu.net/image-archives/).
 
-And see also [Arseny's site](http://designcollector.net/visual-archive/). <br />
+And see also Arseny's site [Designcollector](http://designcollector.net/visual-archive/). <br />
 This site uses Image Archives, and its shortcode is like
 <blockquote>[image_archives first_image_mode="on" order_by="date" order="DESC"
 term_id="118" limit="0,50" size="thumbnail" design="2" column="5"
