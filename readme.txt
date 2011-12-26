@@ -120,7 +120,7 @@ In order to show specific images, I recommend you to name image files nicely. <b
 For example, if you name images like "**aaa-1.jpg**", "**bbb-2.jpg**", "**ccc-3-IWantToShowThis.jpg**", you can search your database for "**ccc-3-IWantToShowThis.jpg**" with "**str=%IWantToShowThis**". <br />
 In other words, I recommend you add "-thumb" or something to the suffix of your specific image filename. Then search it.
 
-* **I want to show a monthly archives.** <br />
+* **I want to show a monthly archive.** <br />
 It is basically impossible. But technically, it is possible. As I explained above, name the filenames nicely. <br />
 If you name images like "**2012-01-abc.jpg**", "**2012-01-vvv.jpg**", "**2012-02-112.jpg**", you can search for posts in 2012/01 with "**str=2012-01-%**". <br />
 I received many questions or requests about this, so if someone doesn't make this function, I'll make it in the future, in another plugin. This is because while "monthly" is based on posts' date, this plugin is based on images you uploaded.
