@@ -6,7 +6,7 @@ Requires at least: 2.0
 Tested up to: 3.3
 Stable tag: trunk
 
-Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to.
+Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. This plugin aims to show your recent posts with images for visitors on your site.
 
 
 == Description ==
