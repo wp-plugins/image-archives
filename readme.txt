@@ -6,14 +6,15 @@ Requires at least: 2.0
 Tested up to: 3.3
 Stable tag: trunk
 
-Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
+Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to.
 
 
 == Description ==
 (First of all, sorry for my bad English.)
 
-Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.<br />
-This plugin create a image list that is based on images you uploaded, not based on posts.
+Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to.<br />
+This plugin create a image list that is based on images you uploaded, not based on posts.<br />
+**This plugin aims to show your recent posts with images for visitors on your site.**
 
 See how this plugin works on [Sample Page(My site)](http://nomeu.net/image-archives/).
 
@@ -29,6 +30,7 @@ If you found any problems with this plugin, please tell me. "nomeu[-at-]nomeu.ne
 = NOTICE =
 * The images you want to show are needed to be attached to posts they were published in.
 * In order to link to the permalink of a post, the post must be "published".
+* If a post doesn't contain a image, this post is not listed.
 
 = HOW TO USE =
 It is simple. Write a shortcode **\[image\_archives\]** on the place where you want to show a list of your images linked to their host posts.
