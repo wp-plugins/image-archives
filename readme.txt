@@ -155,6 +155,9 @@ Exmple, <br /><br />
 
 == Changelog ==
 
+= 0.690 =
+* In design 4 or 5, the pages except for the first page are not display in loading.
+
 = 0.68 =
 * Added "term_id=ALL". With this setting, you can search all of your categories for images.
 * Now jQuery Library in Wordpress includes is loaded.

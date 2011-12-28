@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.68
+ Version: 0.690
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
@@ -607,6 +607,8 @@ class image_archives {
 					
 					// categories を comma 切りから格納
 					$cat_arr = explode (',', $this->v_term_id );
+					// 最初の category だけを抽出。style="display: none; に使う。
+					$cat_first = $cat_arr[0];
 					
 					foreach( $cat_arr as $cat_id ){
 						
@@ -626,7 +628,11 @@ class image_archives {
 							
 							// create a <div> for jQuery.
 							// $img_num is a calculated number of images per a page.
-							$output	.= " <div id='accordion-cat-$this->v_term_id-$current_page'>\n";
+							$output	.= " <div id='accordion-cat-$this->v_term_id-$current_page'";
+								if( $cat_id != $cat_first ) $output .= " style='display: none;' ";
+								elseif( ($cat_id == $cat_first) && ($current_page != 1)) $output .= " style='display: none;' ";
+							$output .= ">\n";
+							
 							$output	.= "  <table class='img_arc'><tbody>\n";
 							for( $img_num = 0; ( $img_num <= ($this->v_item - 1) ) && ( $arr[$i] != NULL ) ; $img_num ++ )
 							{
@@ -716,12 +722,14 @@ class image_archives {
 						}
 						
 						// accordion head
-						$output .= "<div>\n";
+						$output .= "<div";
+						if( $p != 1 ) $output .= " style='display: none;' ";
+						$output .= ">\n";
 						
 						// テーブルを作成
 						$output .= "<table class='img_arc'><tbody>\n";
 						
-						// $cr is a number of images per a page.
+						// $cr is the number of images per a page.
 						for( $cr = 0; ( $cr <= $this->v_item -1 ) && ( $arr[$i] != NULL ) ; $cr++) {
 							
 							$img_src = wp_get_attachment_image_src( $arr[$i][image_post_id], $this->v_img_size );
@@ -765,16 +773,15 @@ class image_archives {
 			{
 				if( $this->v_column > 1)
 				{
-					
-					
 					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
-							. "<div class='image_archives tabs'>\n";
+							. "<div class='image_archives tabs ui-tabs'>\n";
 					
 					//$arr = $this->ia_query( $count );
 					//if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
 					// categories を comma 切りから格納
 					$cat_arr = explode (',', $this->v_term_id );
+					$cat_first = $cat_arr[0];
 					
 					foreach( $cat_arr as $cat_id ){
 						
@@ -796,7 +803,11 @@ class image_archives {
 							
 							// create a <div> for jQuery.
 							// $img_num is a calculated number of images per a page.
-							$output_c	 = "<div id='tabs-cat-$this->v_term_id-$current_page'>\n";
+							$output_c	 = "<div id='tabs-cat-$this->v_term_id-$current_page'";
+								if( $cat_id != $cat_first ) $output_c .= " class='ui-tabs-hide' ";
+								elseif( ($cat_id == $cat_first) && ($current_page != 1)) $output_c .= " class='ui-tabs-hide' ";
+							$output_c .= ">\n";
+							
 							$output_c	.= " <table class='img_arc'><tbody>\n";
 							for( $img_num = 0; ( $img_num <= ($this->v_item - 1) ) && ( $arr[$i] != NULL ) ; $img_num ++ )
 							{
@@ -881,7 +892,7 @@ class image_archives {
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
 					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
-							. "<div class='image_archives tabs'>\n";
+							. "<div class='image_archives tabs ui-tabs'>\n";
 					
 					// calculate a number of pages.
 					$page = $count / $this->v_item;
@@ -924,7 +935,9 @@ class image_archives {
 					// ページ毎に
 					for( $p=1; $p <= $page ; $p++ ) {
 						
-						$output .= "<div id='tabs-$p'>\n";
+						$output .= "<div id='tabs-$p'";
+						if( $p != 1 ) $output .= " class='ui-tabs-hide' ";
+						$output .= ">\n";
 						
 						// テーブルを作成
 						$output .= "<table class='img_arc'><tbody>\n";
