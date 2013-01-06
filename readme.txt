@@ -3,7 +3,7 @@ Contributors: coppola00
 Donate link: 
 Tags: image, archive, post list, list, thumbnail, jQuery, jQuery UI, Accordion, Tabs
 Requires at least: 2.0
-Tested up to: 3.3
+Tested up to: 3.5
 Stable tag: trunk
 
 Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. This plugin aims to show your recent posts with images for visitors on your site.
@@ -154,6 +154,9 @@ Exmple, <br /><br />
 
 
 == Changelog ==
+
+= 0.691 =
+* Update jQuery UI CSS to 1.9.2, jQuery Tabs works properly now.
 
 = 0.690 =
 * In design 4 or 5, the pages except for the first page are not displayed in loading.

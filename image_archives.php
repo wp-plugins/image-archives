@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.690
+ Version: 0.691
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
@@ -599,7 +599,7 @@ class image_archives {
 			if( $this->v_section_sort == 'category' )
 			{
 				if( $this->v_column > 1) {
-					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.9.2.custom.min.css' rel='stylesheet' />\n"
 							. "<div class='image_archives accordion'>\n";
 					
 					//$arr = $this->ia_query( $count );
@@ -686,7 +686,7 @@ class image_archives {
 					$arr = $this->ia_query( $count );
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
-					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.9.2.custom.min.css' rel='stylesheet' />\n"
 							. "<div class='image_archives accordion'>\n";
 					
 					// calculate a number of pages.
@@ -773,7 +773,7 @@ class image_archives {
 			{
 				if( $this->v_column > 1)
 				{
-					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.9.2.custom.min.css' rel='stylesheet' />\n"
 							. "<div class='image_archives tabs ui-tabs'>\n";
 					
 					//$arr = $this->ia_query( $count );
@@ -891,7 +891,7 @@ class image_archives {
 					$arr = $this->ia_query( $count );
 					if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
 					
-					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.8.16.custom.css' rel='stylesheet' />\n"
+					$output = "<link type='text/css' href='". get_bloginfo('home') ."/wp-content/plugins/image-archives/css/jquery-ui-1.9.2.custom.min.css' rel='stylesheet' />\n"
 							. "<div class='image_archives tabs ui-tabs'>\n";
 					
 					// calculate a number of pages.
