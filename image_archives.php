@@ -3,7 +3,7 @@
  Plugin Name: Image Archives
  Plugin URI: 
  Description: Image Archives is a wordpress plugin that displays images from your published posts with a permalink back to the post that the image is connected to. It can also be used as a complete visual archive or gallery archive with several customizable settings.
- Version: 0.691
+ Version: 0.692
  Author: Nomeu
  Author URI: http://nomeu.net/
  */
@@ -511,7 +511,31 @@ class image_archives {
 		//send query
 		if( ($this->v_design != 4) || ($this->v_design != 5) ) {
 			$arr = $this->ia_query( $count );
-			if( !$arr ) return "Query Error. Searching your database was done, but any images were not found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.";
+			if( !$arr ) return "<div style='border:1px solid #888;padding: 5px;'>"
+				."<h3>No images were found or Query error</h3>"
+				."<p>Searching your database was done, but no images were found. Your 'str'(search strings) may be wrong or your input 'term_id' doesn't exist, or 'limit' may be wrong.</p>"
+				."<p>"
+					."first_image_mode=". $this->v_first_image_mode ."<br />"
+					."image_order_by=". $this->v_image_order_by ."(On query)<br />"
+					."image_order=". $this->v_image_order ."<br />"
+					."term_id=". $this->v_term_id ."<br />"
+					."order_by=". $this->v_order_by ."<br />"
+					."order=". $this->v_order ."<br />"
+					."str=". $this->v_str ."<br />"
+					."limit=". $this->v_limit ."<br />"
+					."img_size=". $this->v_img_size ."<br />"
+					."item=". $this->v_item ."<br />"
+					."column=". $this->v_column ."<br />"
+					."design=". $this->v_design ."<br />"
+					."date_format=". $this->v_date_format ."<br />"
+					."date_show=". $this->v_date_show ."<br />"
+					."title_show=". $this->v_title_show ."<br />"
+					."cache=". $this->v_cache ."<br />"
+					."section_name=". $this->v_section_name ."<br />"
+					."section_sort=". $this->v_section_sort ."<br />"
+					."section_result_number_show=". $this->v_section_result_number_show ."<br />"
+				."</p>"
+				."</div>";
 		}
 		
 		// OUTPUT

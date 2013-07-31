@@ -18,19 +18,12 @@ This plugin create a image list that is based on images you uploaded, not based 
 
 See how this plugin works on [Sample Page(My site)](http://nomeu.net/image-archives/).
 
-And see also Arseny's site [Designcollector](http://designcollector.net/visual-archive/). <br />
-This site uses Image Archives, and its shortcode is like
-<blockquote>[image_archives first_image_mode="on" order_by="date" order="DESC"
-term_id="118" limit="0,50" size="thumbnail" design="2" column="5"
-date_show="on" title_show="on" cache="off"]</blockquote>
-(Thank you, Arseny!)
-
 If you found any problems with this plugin, please tell me. "nomeu[-at-]nomeu.net".
 
 = NOTICE =
-* The images you want to show are needed to be attached to posts they were published in.
+* The images you want to show are needed to be attached to posts they were published in (Attaching with post is automatically done by Wordpress when you upload images on creating/editing a post).
 * In order to link to the permalink of a post, the post must be "published".
-* If a post doesn't contain a image, this post is not listed.
+* If a post doesn't contain a image(external images was not searched), this post is not listed.
 
 = HOW TO USE =
 It is simple. Write a shortcode **\[image\_archives\]** on the place where you want to show a list of your images linked to their host posts.
@@ -76,7 +69,7 @@ You can also use the php function of this plugin. In order to use the function, 
 * **first\_image\_mode** is the feature you can show a image per a post without configuring the search strings. Default of this attribute is "off". If you set first\_image\_mode=on, you can use the following two settings.
 * **image\_order\_by** is the method of ordering the searched images within a post.  You can use "title" or "date". This attribute is enabled only when first\_image\_mode is on.
 * **image\_order** requires the sort type within a post. You can use "ASC" or "DESC". Uppercase only. This attribute is enabled only when first\_image\_mode is on.
-* **term\_id** requires unique ID(s) of tags or categories. You can use several IDs like 'term\_id=1,3,10'. Numbers only. Or you can search all of your categories with 'term\_id=ALL' (Uppercase only).
+* **term\_id** requires unique ID(s) of tags or categories(You can check Term IDs on 'Post -> Category' on Dashboard.). You can use several IDs like 'term\_id=1,3,10'. Numbers only. Or you can search all of your categories with 'term\_id=ALL' (Uppercase only).
 * **order\_by** is the method of ordering a list of the images(posts) in the output.  You can use "title" or "date".
 * **order** requires the sort type in the output. You can use "ASC" or "DESC". Uppercase only.
 * **str** is a search string. The search string must be a part of the file name of images you uploaded. This plugin searches "post\_title"(these are seen in "MEDIA LIBRARY" -> "FILE" or "TITLE") in your wordpress database for the string. This string is required to be SQL LIKE condition string. Please refer to [SQL LIKE condition](http://www.techonthenet.com/sql/like.php).
@@ -123,9 +116,9 @@ For example, if you name images like "**aaa-1.jpg**", "**bbb-2.jpg**", "**ccc-3-
 In other words, I recommend you add "-thumb" or something to the suffix of your specific image filename. Then search for it.
 
 * **I want to show a monthly archive.** <br />
-It is basically impossible. But technically, it is possible. As I explained above, name the filenames nicely. <br />
+It is basically impossible with this plugin. But technically, it is possible. As I explained above, name the filenames nicely. <br />
 If you name images like "**2012-01-abc.jpg**", "**2012-01-vvv.jpg**", "**2012-02-112.jpg**", you can search for posts in 2012/01 with "**str=2012-01-%**". <br />
-I received many questions or requests about this, so if someone doesn't make this function, I'll probably make it in the future, in another plugin. This is because while "monthly" is based on posts' date, this plugin is based on images you uploaded.
+I received many questions or requests about this. If you want a monthly archive, please use other plugins.
 
 * **I want to search all categories or tags.** <br />
 Use "term_id=ALL".
@@ -154,6 +147,9 @@ Exmple, <br /><br />
 
 
 == Changelog ==
+
+= 0.692 =
+* Show more detailed error message.
 
 = 0.691 =
 * Update jQuery UI CSS to 1.9.2, jQuery Tabs works properly now.
